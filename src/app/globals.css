@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Theme tokens. `night` is the default; the pre-paint script sets data-theme before first paint. */
+:root,
+[data-theme="night"] {
+  --bg: #111317;
+  --raised: #181b21;
+  --line: #262b34;
+  --sub: #5d6472;
+  --text: #e8eaee;
+  --main: #f5b041;
+  --error: #f0606b;
+  --error-extra: #a43d48;
+  color-scheme: dark;
+}
+[data-theme="paper"] {
+  --bg: #f6f3ee;
+  --raised: #fffdf9;
+  --line: #e6e0d6;
+  --sub: #a39b8f;
+  --text: #2b2722;
+  --main: #d9480f;
+  --error: #c92a55;
+  --error-extra: #8f1f40;
+  color-scheme: light;
+}
+[data-theme="ocean"] {
+  --bg: #0b1622;
+  --raised: #102030;
+  --line: #1c3247;
+  --sub: #54708c;
+  --text: #dbe7f3;
+  --main: #5ec8e5;
+  --error: #ff6b81;
+  --error-extra: #b0405a;
+  color-scheme: dark;
+}
+[data-theme="forest"] {
+  --bg: #121a15;
+  --raised: #18231c;
+  --line: #25362b;
+  --sub: #5f7766;
+  --text: #e3ece5;
+  --main: #8fd694;
+  --error: #f07167;
+  --error-extra: #a8443d;
+  color-scheme: dark;
+}
+[data-theme="ember"] {
+  --bg: #1a1311;
+  --raised: #241a16;
+  --line: #372720;
+  --sub: #7d6258;
+  --text: #f1e4dc;
+  --main: #ff7a45;
+  --error: #ff4d6d;
+  --error-extra: #b03552;
+  color-scheme: dark;
+}
+[data-theme="mist"] {
+  --bg: #eef1f5;
+  --raised: #ffffff;
+  --line: #d9dfe7;
+  --sub: #8d99a8;
+  --text: #1f2733;
+  --main: #3b5bdb;
+  --error: #e03131;
+  --error-extra: #a61e4d;
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-sub: var(--sub);
+  --color-text: var(--text);
+  --color-main: var(--main);
+  --color-error: var(--error);
+  --color-error-extra: var(--error-extra);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  background: var(--bg);
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--main) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--main);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+.caret-idle {
+  animation: caret-blink 1.05s step-end infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.fade-up {
+  animation: fade-up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Focus mode: chrome fades out while a test is running. */
+body header,
+body footer {
+  transition: opacity 0.3s ease;
+}
+body[data-typing="true"] header,
+body[data-typing="true"] footer {
+  opacity: 0;
+}
+body[data-typing="true"] header:hover,
+body[data-typing="true"] footer:hover {
+  opacity: 1;
 }

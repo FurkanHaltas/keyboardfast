@@ -1,0 +1,36 @@
+/**
+ * Frequent-word pools per typing language, compiled by hand from common frequency lists.
+ * Lowercase except German nouns, so punctuation mode can capitalise sentence starts.
+ */
+const pools = {
+  en: `the be of and a to in he have it that for they with as not on she at by this we you do but from or which one would all will there say who make when can more if no man out other so what time up go about than into could state only new year some take come these know see use get like then first any work now may such give over think most even find day also after way many must look before great back through long where much should well people down own just because good each those feel seem how high too place little world very still nation hand old life tell write become here show house both between need mean call develop under last right move thing general school never same another begin while number part turn real leave might want point form off child few small since against ask late home interest large person end open public follow during present without again hold govern around possible head consider word program problem however lead system set order eye plan run keep face fact group play stand increase early course change help line`,
+  tr: `bir bu ve da de için ne çok ben sen o biz siz onlar var yok gibi daha kadar sonra şey her ama ile olarak çünkü en iyi büyük yeni ilk zaman gün yıl insan iş el göz yer ev su yol kendi başka diye bile şimdi önce artık hiç hep bütün değil evet hayır nasıl neden niçin nerede kim hangi şu orada burada iki üç dört beş on yüz bin olmak etmek yapmak gelmek gitmek almak vermek bakmak görmek bilmek istemek demek söylemek düşünmek çalışmak okumak yazmak konuşmak anlamak sevmek kalmak bulmak başlamak bitmek açmak kapamak çıkmak girmek oturmak durmak beklemek yaşamak ölmek doğru yanlış küçük uzun kısa güzel kötü eski genç yaşlı sıcak soğuk açık kapalı hızlı yavaş kolay zor önemli gerekli mümkün aynı farklı tek bütün bazı birkaç biraz çocuk anne baba kardeş arkadaş öğretmen öğrenci okul kitap kalem masa kapı pencere oda şehir ülke dünya hava deniz dağ ağaç çiçek güneş ay yıldız sabah akşam gece hafta saat dakika para fiyat soru cevap haber dil kelime cümle ses renk beyaz siyah kırmızı mavi yeşil sarı yemek ekmek çay kahve süt araba otobüs tren uçak ışık ateş toprak hayat sevgi umut fikir`,
+  de: `der die das und sein in ein zu haben ich werden sie von nicht mit es sich auch auf für an er so dass können dies als ihr ja wie bei oder wir aber dann man da kein noch nach was also all wenn nur müssen sagen um über machen jetzt immer gehen viel mehr schon geben gut kommen sollen wollen mein durch hier sehen lassen ganz neu Zeit Jahr groß bis unter wieder weil zwei Mensch heute nun stehen finden bleiben liegen Tag gleich alt nehmen sehr Hand doch denn Frau Kind halten Leben ohne Land Welt hoch klein Weg Haus spielen lang heißen eigentlich einfach Mann Stadt Arbeit wissen Frage zeigen bringen Seite Ende glauben stellen sprechen leben Teil Schule Fall erst gehören arbeiten Wasser Woche Nacht Morgen Abend Freund Buch Auge Kopf Wort Name Geld Bild Grund Recht Problem Beispiel denken fragen kennen lernen spät früh schnell warm kalt schön richtig wichtig möglich ander letzt eigen weit nah zusammen vielleicht gerade zwischen gegen während schreiben lesen hören folgen laufen fahren essen trinken schlafen helfen kaufen tragen setzen ziehen schließen öffnen fallen wohnen warten bekommen beginnen verstehen erklären versuchen`,
+  es: `de la que el en y a los se del las un por con no una su para es al lo como más pero sus le ya o este sí porque esta entre cuando muy sin sobre también me hasta hay donde quien desde todo nos durante todos uno les ni contra otros ese eso ante ellos e esto mí antes algunos qué unos yo otro otras otra él tanto esa estos mucho quienes nada muchos cual poco ella estar estas algunas algo nosotros mi mis tú te ti tu tus ellas nosotras vosotros vosotras os mío mía ser hacer poder decir ir ver dar saber querer llegar pasar deber poner parecer quedar creer hablar llevar dejar seguir encontrar llamar venir pensar salir volver tomar conocer vivir sentir tratar mirar contar empezar esperar buscar existir entrar trabajar escribir perder producir ocurrir entender pedir recibir recordar terminar permitir aparecer conseguir comenzar servir sacar necesitar mantener resultar leer caer cambiar presentar crear abrir considerar oír acabar casa tiempo año día vez hombre mundo vida mano parte niño ojo mujer lugar trabajo punto gobierno país forma caso semana noche agua palabra ciudad nuevo grande bueno mismo primero largo pequeño`,
+  fr: `le de un être et à il avoir ne je son que se qui ce dans en du elle au pour pas que vous par sur faire plus dire me on mon lui nous comme mais pouvoir avec tout y aller voir en bien où sans tu ou leur homme si deux mari moi vouloir te femme venir quand grand celui notre devoir là jour prendre même votre rien petit encore aussi quelque dont tout mer trouver donner temps ça peu même falloir sous parler alors main chose ton mettre vie savoir yeux passer autre après regarder toujours puis jamais cela aimer non heure croire cent monde donc enfant fois seul autre entendre ainsi pendant jeune connaître ville terre maison demander arriver rester porte nuit sortir pays chercher vers tête porter enfin rendre penser nouveau dernier mot devant comprendre partir lire écrire vivre entrer tenir sembler travail parce bon beaucoup sentir rire moment place matin soir eau livre ami route année histoire question raison point exemple semaine part tôt tard vite lent chaud froid beau vrai facile difficile`,
+  pt: `de a o que e do da em um para é com não uma os no se na por mais as dos como mas foi ao ele das tem à seu sua ou ser quando muito há nos já está eu também só pelo pela até isso ela entre era depois sem mesmo aos ter seus quem nas me esse eles estão você tinha foram essa num nem suas meu às minha têm numa pelos elas havia seja qual será nós tenho lhe deles essas esses pelas este fosse dele tu te vocês vos lhes meus minhas teu tua nosso nossa dia tempo ano vez homem casa vida mundo coisa parte mão olho mulher lugar trabalho ponto país forma caso semana noite água palavra cidade novo grande bom primeiro longo pequeno fazer poder dizer ir ver dar saber querer chegar passar dever pôr parecer ficar crer falar levar deixar seguir encontrar chamar vir pensar sair voltar tomar conhecer viver sentir olhar contar começar esperar buscar entrar trabalhar escrever perder entender pedir receber lembrar terminar abrir ler cair mudar criar ouvir acabar sempre nunca hoje amanhã ontem agora aqui ali perto longe rápido devagar fácil difícil`,
+} as const;
+
+export type WordLanguage = keyof typeof pools;
+export const WORD_LANGUAGES = Object.keys(pools) as WordLanguage[];
+
+const cache = new Map<WordLanguage, string[]>();
+
+export function getWordList(lang: WordLanguage): string[] {
+  let list = cache.get(lang);
+  if (!list) {
+    list = [...new Set(pools[lang].split(/\s+/).filter(Boolean))];
+    cache.set(lang, list);
+  }
+  return list;
+}
+
+/** Native names so the picker reads naturally whatever the UI language is. */
+export const WORD_LANGUAGE_NAMES: Record<WordLanguage, string> = {
+  en: "English",
+  tr: "Türkçe",
+  de: "Deutsch",
+  es: "Español",
+  fr: "Français",
+  pt: "Português",
+};
