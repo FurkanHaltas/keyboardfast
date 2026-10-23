@@ -7,6 +7,7 @@ import { InlineScript } from "@/components/InlineScript";
 import { SettingsBoot } from "@/components/SettingsBoot";
 import { getDictionary, isLocale, LOCALES } from "@/i18n/config";
 import { I18nProvider } from "@/i18n/I18nProvider";
+import { SITE_URL } from "@/lib/site";
 import { SETTINGS_KEY } from "@/lib/storageKeys";
 import "../globals.css";
 
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   if (!isLocale(lang)) return {};
   const t = await getDictionary(lang);
   return {
+    metadataBase: new URL(SITE_URL),
     title: { default: t.meta.title, template: `%s · keyboardfast` },
     description: t.meta.description,
     alternates: {
