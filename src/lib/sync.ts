@@ -7,12 +7,14 @@ import { supabase } from "./supabase";
 
 interface AuthState {
   user: { id: string; email: string | null } | null;
+  /** undefined while loading, null when the user has not picked a username yet */
+  profile: { username: string } | null | undefined;
   /** true once the stored session has been checked */
   ready: boolean;
   syncing: boolean;
 }
 
-export const useAuth = create<AuthState>()(() => ({ user: null, ready: false, syncing: false }));
+export const useAuth = create<AuthState>()(() => ({ user: null, profile: undefined, ready: false, syncing: false }));
 
 interface Row {
   id: string;
@@ -166,9 +168,13 @@ export function startAuth() {
   started = true;
   const apply = (user: User | null) => {
     const prev = useAuth.getState().user?.id ?? null;
+    if (user?.id !== prev) useAuth.setState({ profile: undefined });
     useAuth.setState({ user: user ? { id: user.id, email: user.email ?? null } : null, ready: true });
     setHistoryScope(user?.id ?? null);
-    if (user && user.id !== prev) void syncAccount(user.id);
+    if (user && user.id !== prev) {
+      void syncAccount(user.id);
+      void loadProfile(user.id);
+    }
   };
   const client = supabase();
   void client.auth.getSession().then(({ data }) => apply(data.session?.user ?? null));
@@ -190,4 +196,52 @@ export async function signInWithGoogle(redirectTo: string) {
 
 export async function signOut() {
   await supabase().auth.signOut();
+}
+
+async function loadProfile(uid: string) {
+  const { data, error } = await supabase().from("profiles").select("username").eq("id", uid).maybeSingle();
+  if (error || useAuth.getState().user?.id !== uid) return;
+  useAuth.setState({ profile: data ? { username: data.username as string } : null });
+}
+
+export const USERNAME_RE = /^[A-Za-z0-9_]{3,20}$/;
+
+/** Creates or renames the profile. */
+export async function saveUsername(username: string): Promise<"ok" | "taken" | "invalid" | "error"> {
+  const uid = useAuth.getState().user?.id;
+  if (!uid) return "error";
+  if (!USERNAME_RE.test(username)) return "invalid";
+  const { error } = await supabase().from("profiles").upsert({ id: uid, username }, { onConflict: "id" });
+  if (error) return error.code === "23505" ? "taken" : "error";
+  useAuth.setState({ profile: { username } });
+  return "ok";
+}
+
+export interface LeaderboardRow {
+  rank: number;
+  username: string;
+  is_me: boolean;
+  wpm: number;
+  raw: number;
+  acc: number;
+  consistency: number;
+  created_at: string;
+}
+
+export async function fetchLeaderboard(mode: string, mode2: string, lang: string | null): Promise<LeaderboardRow[] | null> {
+  const { data, error } = await supabase().rpc("leaderboard", {
+    p_mode: mode,
+    p_mode2: mode2,
+    p_lang: lang,
+    p_limit: 50,
+  });
+  if (error) return null;
+  return (data as LeaderboardRow[]).map((r) => ({
+    ...r,
+    rank: Number(r.rank),
+    wpm: Number(r.wpm),
+    raw: Number(r.raw),
+    acc: Number(r.acc),
+    consistency: Number(r.consistency),
+  }));
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowRight, ArrowUp, Lightbulb, RotateCcw, Trophy } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUp, ChartLine, Lightbulb, LogIn, RotateCcw, Trophy } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Kbd } from "@/components/Footer";
 import { LineChart } from "@/components/charts/LineChart";
@@ -8,6 +8,8 @@ import type { TestResult } from "@/engine/types";
 import { fmt } from "@/i18n/config";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { Comparison } from "@/lib/history";
+import { useAuth } from "@/lib/sync";
+import { useUi } from "@/lib/ui";
 
 interface Props {
   result: TestResult;
@@ -183,7 +185,27 @@ function Panel({ title, hint, children }: { title: string; hint?: string; childr
 
 function ComparisonBlock({ wpm, comparison, saved }: { wpm: number; comparison: Comparison | null; saved: boolean }) {
   const { t } = useI18n();
+  const user = useAuth((s) => s.user);
+  const openAuth = useUi((s) => s.setAuthOpen);
   if (!saved) return <p className="max-w-48 text-xs text-sub">{t.results.invalid}</p>;
+  // History-based comparison is a member feature.
+  if (!user) {
+    return (
+      <div className="max-w-56 rounded-xl border border-line p-3.5 text-xs">
+        <p className="flex items-center gap-1.5 font-medium text-text">
+          <ChartLine size={14} className="text-main" /> {t.results.guestTitle}
+        </p>
+        <p className="mt-1 leading-relaxed text-sub">{t.results.guestBody}</p>
+        <button
+          type="button"
+          onClick={() => openAuth(true)}
+          className="mt-2.5 flex items-center gap-1 font-medium text-main transition hover:brightness-110"
+        >
+          <LogIn size={13} /> {t.auth.signIn}
+        </button>
+      </div>
+    );
+  }
   if (!comparison) return null;
   if (comparison.count === 0) return <p className="max-w-48 text-xs leading-relaxed text-sub">{t.results.firstTest}</p>;
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartLine, Keyboard, Settings2 } from "lucide-react";
+import { ChartLine, Crown, Keyboard, Settings2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -9,6 +9,7 @@ import { AccountMenu } from "./AccountMenu";
 import { AuthDialog } from "./AuthDialog";
 import { LanguageMenu } from "./LanguageMenu";
 import { SettingsDialog } from "./SettingsDialog";
+import { UsernameDialog } from "./UsernameDialog";
 
 export function Header() {
   const { locale, t } = useI18n();
@@ -19,6 +20,7 @@ export function Header() {
     // The logo already links to the test, so the text link is hidden on narrow screens.
     { href: `/${locale}`, label: t.nav.test, icon: Keyboard, mobile: false },
     { href: `/${locale}/progress`, label: t.nav.progress, icon: ChartLine, mobile: true },
+    { href: `/${locale}/leaderboard`, label: t.nav.leaderboard, icon: Crown, mobile: true },
   ];
 
   return (
@@ -61,6 +63,7 @@ export function Header() {
       </nav>
       <SettingsDialog />
       <AuthDialog />
+      <UsernameDialog />
     </header>
   );
 }

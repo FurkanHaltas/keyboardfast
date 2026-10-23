@@ -1,6 +1,6 @@
 "use client";
 
-import { LogIn, LogOut } from "lucide-react";
+import { LogIn, LogOut, UserPen } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { signOut, useAuth } from "@/lib/sync";
@@ -9,8 +9,9 @@ import { useUi } from "@/lib/ui";
 /** Sign-in button when signed out; avatar with a small menu when signed in. */
 export function AccountMenu() {
   const { t } = useI18n();
-  const { user, ready } = useAuth();
+  const { user, ready, profile } = useAuth();
   const openAuth = useUi((s) => s.setAuthOpen);
+  const openUsername = useUi((s) => s.setUsernameOpen);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -44,7 +45,7 @@ export function AccountMenu() {
     );
   }
 
-  const initial = (user.email ?? "?").charAt(0).toUpperCase();
+  const initial = (profile?.username ?? user.email ?? "?").charAt(0).toUpperCase();
   return (
     <div ref={ref} className="relative ml-1">
       <button
@@ -64,9 +65,21 @@ export function AccountMenu() {
         >
           <div className="px-3 py-2.5">
             <p className="text-xs text-sub">{t.auth.signedInAs}</p>
-            <p className="truncate text-sm text-text">{user.email}</p>
+            {profile && <p className="truncate font-mono text-sm text-text">@{profile.username}</p>}
+            <p className="truncate text-xs text-sub">{user.email}</p>
           </div>
           <div className="my-1 h-px bg-line" />
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false);
+              openUsername(true);
+            }}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-text transition-colors hover:bg-line"
+          >
+            <UserPen size={15} /> {profile ? t.profile.change : t.leaderboard.chooseUsername}
+          </button>
           <button
             type="button"
             role="menuitem"

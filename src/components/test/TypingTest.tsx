@@ -30,7 +30,7 @@ export function TypingTest() {
   const cfg = useSettings((s) => [s.mode, s.time, s.words, s.wordLang, s.codeLang, s.punctuation, s.numbers].join("|"));
   const { liveWpm, smoothCaret } = useSettings(useShallow((s) => ({ liveWpm: s.liveWpm, smoothCaret: s.smoothCaret })));
   // Any open dialog owns the keyboard.
-  const settingsOpen = useUi((s) => s.settingsOpen || s.authOpen);
+  const settingsOpen = useUi((s) => s.settingsOpen || s.authOpen || s.usernameOpen);
 
   const [setup, setSetup] = useState<TestSetup | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);

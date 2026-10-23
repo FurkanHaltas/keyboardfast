@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartLine, CloudCheck, CloudUpload, Filter, LogIn, Trash2 } from "lucide-react";
+import { ChartLine, CloudCheck, CloudUpload, Filter, Lock, LogIn, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { LineChart } from "@/components/charts/LineChart";
@@ -28,6 +28,7 @@ export function ProgressView() {
   const history = useSyncExternalStore(subscribeHistory, getHistorySnapshot, () => null);
   const [filter, setFilter] = useState<string>(ALL);
   const user = useAuth((s) => s.user);
+  const authReady = useAuth((s) => s.ready);
   const openAuth = useUi((s) => s.setAuthOpen);
 
   const modes = useMemo(() => {
@@ -41,7 +42,26 @@ export function ProgressView() {
     [history, filter],
   );
 
-  if (!history) return <div className="flex-1" aria-busy />;
+  if (!history || !authReady) return <div className="flex-1" aria-busy />;
+
+  if (!user) {
+    return (
+      <div className="fade-up flex flex-1 flex-col items-center justify-center gap-4 pb-20 text-center">
+        <span className="rounded-2xl bg-raised p-4 text-main">
+          <Lock size={28} />
+        </span>
+        <h1 className="text-2xl font-semibold">{t.progress.lockedTitle}</h1>
+        <p className="max-w-md text-sub">{t.progress.lockedBody}</p>
+        <button
+          type="button"
+          onClick={() => openAuth(true)}
+          className="mt-2 flex items-center gap-2 rounded-xl bg-main px-5 py-2.5 font-medium text-bg transition hover:brightness-110"
+        >
+          <LogIn size={17} /> {t.auth.signIn}
+        </button>
+      </div>
+    );
+  }
 
   if (history.length === 0) {
     return (
