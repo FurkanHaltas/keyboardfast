@@ -25,26 +25,31 @@ export interface HistoryEntry {
 export const modeKey = (e: Pick<HistoryEntry, "mode" | "mode2" | "lang" | "punctuation" | "numbers">) =>
   [e.mode, e.mode2, e.mode === "code" ? "" : e.lang, e.punctuation ? "p" : "", e.numbers ? "n" : ""].join("|");
 
-/**
- * Storage boundary. The local implementation lives in the browser; a Supabase-backed
- * store with the same shape will replace it once accounts land.
- */
-export interface HistoryStore {
-  list(): HistoryEntry[];
-  add(entry: HistoryEntry): void;
-  clear(): void;
-}
-
-const KEY = HISTORY_KEY;
 const MAX = 2000;
+
+/**
+ * The local history is a per-scope cache: signed-out results live under HISTORY_KEY,
+ * each account's synced copy under HISTORY_KEY:<userId>. The UI always reads the active scope.
+ */
+let scope: string | null = null;
+const keyFor = (s: string | null) => (s ? `${HISTORY_KEY}:${s}` : HISTORY_KEY);
 
 const listeners = new Set<() => void>();
 const notify = () => listeners.forEach((l) => l());
 
+export function setHistoryScope(userId: string | null) {
+  if (scope === userId) return;
+  scope = userId;
+  cache = null;
+  notify();
+}
+
+export const getHistoryScope = () => scope;
+
 /** useSyncExternalStore adapter: re-reads when this tab or another tab changes the history. */
 export function subscribeHistory(cb: () => void) {
   listeners.add(cb);
-  const onStorage = (e: StorageEvent) => e.key === KEY && cb();
+  const onStorage = (e: StorageEvent) => e.key === keyFor(scope) && cb();
   window.addEventListener("storage", onStorage);
   return () => {
     listeners.delete(cb);
@@ -52,41 +57,46 @@ export function subscribeHistory(cb: () => void) {
   };
 }
 
-let cache: { raw: string | null; list: HistoryEntry[] } | null = null;
+export function readHistory(s: string | null): HistoryEntry[] {
+  try {
+    const raw = localStorage.getItem(keyFor(s));
+    return raw ? (JSON.parse(raw) as HistoryEntry[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function writeHistory(s: string | null, list: HistoryEntry[]) {
+  try {
+    if (list.length) localStorage.setItem(keyFor(s), JSON.stringify(list.slice(-MAX)));
+    else localStorage.removeItem(keyFor(s));
+  } catch {
+    // Storage full or blocked (private mode) - the test still shows its result.
+  }
+  if (s === scope) notify();
+}
+
+let cache: { key: string; raw: string | null; list: HistoryEntry[] } | null = null;
 export function getHistorySnapshot(): HistoryEntry[] {
+  const key = keyFor(scope);
   let raw: string | null = null;
   try {
-    raw = localStorage.getItem(KEY);
+    raw = localStorage.getItem(key);
   } catch {}
-  if (!cache || cache.raw !== raw) {
+  if (!cache || cache.key !== key || cache.raw !== raw) {
     let list: HistoryEntry[] = [];
     try {
       list = raw ? (JSON.parse(raw) as HistoryEntry[]) : [];
     } catch {}
-    cache = { raw, list };
+    cache = { key, raw, list };
   }
   return cache.list;
 }
 
-export const localHistory: HistoryStore = {
-  list: getHistorySnapshot,
-  add(entry) {
-    try {
-      const all = [...getHistorySnapshot(), entry];
-      localStorage.setItem(KEY, JSON.stringify(all.slice(-MAX)));
-      notify();
-    } catch {
-      // Storage full or blocked (private mode) - the test still shows its result.
-    }
-  },
-  clear() {
-    try {
-      localStorage.removeItem(KEY);
-      notify();
-    } catch {}
-  },
-};
-
+/** Appends to the active scope's local cache. Remote persistence lives in sync.ts. */
+export function addLocal(entry: HistoryEntry) {
+  writeHistory(scope, [...getHistorySnapshot(), entry]);
+}
 export interface Comparison {
   previousBest: number | null;
   previousAvg: number | null;

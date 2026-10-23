@@ -2,13 +2,15 @@
 
 import { useEffect } from "react";
 import { useSettings } from "@/lib/settings";
+import { startAuth } from "@/lib/sync";
 
-/** Loads saved settings after hydration and keeps the document theme in sync. */
+/** Loads saved settings and the auth session after hydration; keeps the document theme in sync. */
 export function SettingsBoot() {
   const theme = useSettings((s) => s.theme);
 
   useEffect(() => {
     void useSettings.persist.rehydrate();
+    startAuth();
   }, []);
 
   useEffect(() => {

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useI18n } from "@/i18n/I18nProvider";
 import { useUi } from "@/lib/ui";
+import { AccountMenu } from "./AccountMenu";
+import { AuthDialog } from "./AuthDialog";
 import { LanguageMenu } from "./LanguageMenu";
 import { SettingsDialog } from "./SettingsDialog";
 
@@ -14,8 +16,9 @@ export function Header() {
   const openSettings = useUi((s) => s.setSettingsOpen);
 
   const nav = [
-    { href: `/${locale}`, label: t.nav.test, icon: Keyboard },
-    { href: `/${locale}/progress`, label: t.nav.progress, icon: ChartLine },
+    // The logo already links to the test, so the text link is hidden on narrow screens.
+    { href: `/${locale}`, label: t.nav.test, icon: Keyboard, mobile: false },
+    { href: `/${locale}/progress`, label: t.nav.progress, icon: ChartLine, mobile: true },
   ];
 
   return (
@@ -28,16 +31,16 @@ export function Header() {
       </Link>
 
       <nav className="flex items-center text-sm sm:gap-1">
-        {nav.map(({ href, label, icon: Icon }) => {
+        {nav.map(({ href, label, icon: Icon, mobile }) => {
           const active = pathname === href;
           return (
             <Link
               key={href}
               href={href}
               aria-current={active ? "page" : undefined}
-              className={`flex items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:text-text sm:px-3 ${
-                active ? "text-text" : "text-sub"
-              }`}
+              className={`items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:text-text sm:flex sm:px-3 ${
+                mobile ? "flex" : "hidden"
+              } ${active ? "text-text" : "text-sub"}`}
             >
               <Icon size={17} strokeWidth={2} />
               <span className="hidden sm:inline">{label}</span>
@@ -54,8 +57,10 @@ export function Header() {
           <span className="hidden sm:inline">{t.nav.settings}</span>
         </button>
         <LanguageMenu />
+        <AccountMenu />
       </nav>
       <SettingsDialog />
+      <AuthDialog />
     </header>
   );
 }

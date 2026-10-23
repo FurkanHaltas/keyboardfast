@@ -1,14 +1,16 @@
 "use client";
 
-import { ChartLine, Filter, Trash2 } from "lucide-react";
+import { ChartLine, CloudCheck, CloudUpload, Filter, LogIn, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { LineChart } from "@/components/charts/LineChart";
 import { Menu } from "@/components/Menu";
 import { fmt } from "@/i18n/config";
 import { useI18n } from "@/i18n/I18nProvider";
-import { getHistorySnapshot, localHistory, modeKey, subscribeHistory, type HistoryEntry } from "@/lib/history";
+import { getHistorySnapshot, modeKey, readHistory, subscribeHistory, type HistoryEntry } from "@/lib/history";
 import { modeLabel } from "@/lib/modeLabel";
+import { clearAllResults, importAnonymous, useAuth } from "@/lib/sync";
+import { useUi } from "@/lib/ui";
 
 const ALL = "__all";
 
@@ -25,6 +27,8 @@ export function ProgressView() {
   const { t, locale } = useI18n();
   const history = useSyncExternalStore(subscribeHistory, getHistorySnapshot, () => null);
   const [filter, setFilter] = useState<string>(ALL);
+  const user = useAuth((s) => s.user);
+  const openAuth = useUi((s) => s.setAuthOpen);
 
   const modes = useMemo(() => {
     const map = new Map<string, HistoryEntry>();
@@ -42,6 +46,7 @@ export function ProgressView() {
   if (history.length === 0) {
     return (
       <div className="fade-up flex flex-1 flex-col items-center justify-center gap-4 pb-20 text-center">
+        <ImportBanner />
         <span className="rounded-2xl bg-raised p-4 text-main">
           <ChartLine size={28} />
         </span>
@@ -69,6 +74,8 @@ export function ProgressView() {
 
   return (
     <div className="fade-up space-y-10 pb-12">
+      <ImportBanner />
+
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">{t.progress.title}</h1>
@@ -156,13 +163,27 @@ export function ProgressView() {
       </section>
 
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-sub">
-        <p>{t.progress.storageNote}</p>
+        {user ? (
+          <p className="flex items-center gap-1.5">
+            <CloudCheck size={15} className="text-main" /> {t.progress.syncedNote}
+          </p>
+        ) : (
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            {t.progress.signInNote}
+            <button
+              type="button"
+              onClick={() => openAuth(true)}
+              className="flex items-center gap-1 font-medium text-main transition hover:brightness-110"
+            >
+              <LogIn size={13} /> {t.auth.signIn}
+            </button>
+          </p>
+        )}
         <button
           type="button"
-          onClick={() => {
-            if (!confirm(t.progress.clearConfirm)) return;
-            localHistory.clear();
-            setFilter(ALL);
+          onClick={async () => {
+            if (!confirm(user ? t.progress.clearConfirmAccount : t.progress.clearConfirm)) return;
+            if (await clearAllResults()) setFilter(ALL);
           }}
           className="flex items-center gap-1.5 rounded-lg px-3 py-2 transition-colors hover:bg-raised hover:text-error"
         >
@@ -188,5 +209,53 @@ function ChartCard({ title, children }: { title: string; children: React.ReactNo
       <h2 className="mb-4 text-sm font-medium">{title}</h2>
       {children}
     </section>
+  );
+}
+
+const subscribeNoop = () => () => {};
+
+/** Offers to move results recorded while signed out into the signed-in account. */
+function ImportBanner() {
+  const { t } = useI18n();
+  const user = useAuth((s) => s.user);
+  // Re-read whenever any history changes (an import clears the signed-out list).
+  const count = useSyncExternalStore(
+    user ? subscribeHistory : subscribeNoop,
+    () => (user ? readHistory(null).length : 0),
+    () => 0,
+  );
+  const [state, setState] = useState<"idle" | "busy" | "dismissed" | "failed">("idle");
+
+  if (!user || count === 0 || state === "dismissed") return null;
+  return (
+    <div className="fade-up flex w-full flex-wrap items-center justify-between gap-4 rounded-2xl border border-main/30 bg-main/10 px-5 py-4 text-left">
+      <div className="flex items-start gap-3">
+        <CloudUpload size={20} className="mt-0.5 shrink-0 text-main" />
+        <div>
+          <p className="text-sm font-medium text-text">{fmt(t.progress.importTitle, { n: count })}</p>
+          <p className="mt-0.5 text-xs text-sub">{state === "failed" ? t.auth.error : t.progress.importBody}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setState("dismissed")}
+          className="rounded-lg px-3 py-2 text-sm text-sub transition-colors hover:text-text"
+        >
+          {t.progress.dismiss}
+        </button>
+        <button
+          type="button"
+          disabled={state === "busy"}
+          onClick={async () => {
+            setState("busy");
+            setState((await importAnonymous()) ? "idle" : "failed");
+          }}
+          className="rounded-xl bg-main px-4 py-2 text-sm font-medium text-bg transition hover:brightness-110 disabled:opacity-70"
+        >
+          {state === "busy" ? t.progress.importing : t.progress.importAction}
+        </button>
+      </div>
+    </div>
   );
 }

@@ -6,9 +6,10 @@ import { useShallow } from "zustand/react/shallow";
 import type { TestResult } from "@/engine/types";
 import { useI18n } from "@/i18n/I18nProvider";
 import { createTest, repeatTest, type TestSetup } from "@/lib/createTest";
-import { compare, isSavable, localHistory, type Comparison, type HistoryEntry } from "@/lib/history";
+import { compare, getHistorySnapshot, isSavable, type Comparison, type HistoryEntry } from "@/lib/history";
 import { modeLabel } from "@/lib/modeLabel";
 import { useSettings, useSettingsReady } from "@/lib/settings";
+import { saveResult } from "@/lib/sync";
 import { useUi } from "@/lib/ui";
 import { ConfigBar } from "./ConfigBar";
 import { Results } from "./Results";
@@ -28,7 +29,8 @@ export function TypingTest() {
   const ready = useSettingsReady();
   const cfg = useSettings((s) => [s.mode, s.time, s.words, s.wordLang, s.codeLang, s.punctuation, s.numbers].join("|"));
   const { liveWpm, smoothCaret } = useSettings(useShallow((s) => ({ liveWpm: s.liveWpm, smoothCaret: s.smoothCaret })));
-  const settingsOpen = useUi((s) => s.settingsOpen);
+  // Any open dialog owns the keyboard.
+  const settingsOpen = useUi((s) => s.settingsOpen || s.authOpen);
 
   const [setup, setSetup] = useState<TestSetup | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
@@ -109,8 +111,8 @@ export function TypingTest() {
     const saved = isSavable(r.durationMs, r.wpm);
     let comparison: Comparison | null = null;
     if (saved) {
-      comparison = compare(localHistory.list(), entry);
-      localHistory.add(entry);
+      comparison = compare(getHistorySnapshot(), entry);
+      saveResult(entry);
     }
     setOutcome({ result: r, comparison, saved });
   }, [engine, setup, status, version]);
