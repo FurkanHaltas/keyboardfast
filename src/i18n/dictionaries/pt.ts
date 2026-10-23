@@ -106,6 +106,7 @@ const pt: Dictionary = {
     callbackFailed: "Este link de acesso é inválido ou expirou.",
     tryAgain: "Tentar novamente",
     signedInAs: "Conectado como",
+    consent: "Ao continuar, você aceita os [Termos de Uso] e a [Política de Privacidade].",
   },
   leaderboard: {
     title: "Ranking",
@@ -134,6 +135,43 @@ const pt: Dictionary = {
     later: "Depois",
     change: "mudar nome de usuário",
   },
+  footer: {
+    privacy: "Privacidade",
+    terms: "Termos",
+    cookies: "Cookies",
+    contact: "Contato",
+    rights: "Todos os direitos reservados.",
+  },
+  cookie: {
+    text: "Usamos apenas o armazenamento de que o site precisa para funcionar – sem anúncios e sem rastreamento.",
+    ok: "Entendi",
+    more: "Política de cookies",
+  },
+  account: {
+    download: "Baixar meus dados",
+    delete: "Excluir conta",
+    deleteTitle: "Excluir sua conta?",
+    deleteBody: "Seu e-mail, seu nome de usuário e todos os seus resultados serão removidos permanentemente. Isso não pode ser desfeito.",
+    deleteAction: "Excluir permanentemente",
+    deleting: "Excluindo…",
+    cancel: "Cancelar",
+    failed: "Não deu certo. Tente novamente.",
+  },
+  notFound: {
+    title: "Página não encontrada",
+    body: "A página que você procura não existe ou foi movida.",
+    home: "Voltar ao teste",
+  },
+  errorPage: {
+    title: "Algo deu errado",
+    body: "Ocorreu um erro inesperado. Tente novamente ou recarregue a página.",
+    retry: "Tentar novamente",
+  },
+  legal: {
+    updated: "Última atualização: {date}",
+    englishOnly: "Esta página está disponível em inglês e turco.",
+  },
+  skip: "Pular para o conteúdo",
   settings: {
     title: "Ajustes",
     theme: "tema",

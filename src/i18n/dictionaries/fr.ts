@@ -106,6 +106,7 @@ const fr: Dictionary = {
     callbackFailed: "Ce lien de connexion est invalide ou a expiré.",
     tryAgain: "Réessayer",
     signedInAs: "Connecté en tant que",
+    consent: "En continuant, vous acceptez les [Conditions d'utilisation] et la [Politique de confidentialité].",
   },
   leaderboard: {
     title: "Classement",
@@ -134,6 +135,43 @@ const fr: Dictionary = {
     later: "Plus tard",
     change: "changer de nom d'utilisateur",
   },
+  footer: {
+    privacy: "Confidentialité",
+    terms: "Conditions",
+    cookies: "Cookies",
+    contact: "Contact",
+    rights: "Tous droits réservés.",
+  },
+  cookie: {
+    text: "Nous n'utilisons que le stockage nécessaire au fonctionnement du site – ni publicité, ni suivi.",
+    ok: "Compris",
+    more: "Politique de cookies",
+  },
+  account: {
+    download: "Télécharger mes données",
+    delete: "Supprimer le compte",
+    deleteTitle: "Supprimer votre compte ?",
+    deleteBody: "Votre adresse e-mail, votre nom d'utilisateur et tous vos résultats seront définitivement supprimés. Cette action est irréversible.",
+    deleteAction: "Supprimer définitivement",
+    deleting: "Suppression…",
+    cancel: "Annuler",
+    failed: "Cela n'a pas fonctionné. Veuillez réessayer.",
+  },
+  notFound: {
+    title: "Page introuvable",
+    body: "La page que vous cherchez n'existe pas ou a été déplacée.",
+    home: "Retour au test",
+  },
+  errorPage: {
+    title: "Une erreur s'est produite",
+    body: "Une erreur inattendue est survenue. Réessayez ou rechargez la page.",
+    retry: "Réessayer",
+  },
+  legal: {
+    updated: "Dernière mise à jour : {date}",
+    englishOnly: "Cette page est disponible en anglais et en turc.",
+  },
+  skip: "Aller au contenu",
   settings: {
     title: "Réglages",
     theme: "thème",

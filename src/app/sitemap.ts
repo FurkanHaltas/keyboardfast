@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { LOCALES } from "@/i18n/config";
 import { SITE_URL } from "@/lib/site";
 
-const PAGES = ["", "/leaderboard", "/progress"];
+const PAGES = ["", "/leaderboard", "/progress", "/privacy", "/cookies", "/terms"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return PAGES.flatMap((page) =>

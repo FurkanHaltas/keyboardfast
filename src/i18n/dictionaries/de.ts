@@ -106,6 +106,7 @@ const de: Dictionary = {
     callbackFailed: "Dieser Anmeldelink ist ungültig oder abgelaufen.",
     tryAgain: "Erneut versuchen",
     signedInAs: "Angemeldet als",
+    consent: "Mit dem Fortfahren akzeptierst du die [Nutzungsbedingungen] und die [Datenschutzerklärung].",
   },
   leaderboard: {
     title: "Rangliste",
@@ -134,6 +135,43 @@ const de: Dictionary = {
     later: "Später",
     change: "Benutzernamen ändern",
   },
+  footer: {
+    privacy: "Datenschutz",
+    terms: "Nutzungsbedingungen",
+    cookies: "Cookies",
+    contact: "Kontakt",
+    rights: "Alle Rechte vorbehalten.",
+  },
+  cookie: {
+    text: "Wir nutzen nur Speicher, den die Seite zum Funktionieren braucht – keine Werbung, kein Tracking.",
+    ok: "Verstanden",
+    more: "Cookie-Richtlinie",
+  },
+  account: {
+    download: "Meine Daten herunterladen",
+    delete: "Konto löschen",
+    deleteTitle: "Konto löschen?",
+    deleteBody: "Deine E-Mail-Adresse, dein Benutzername und alle Ergebnisse werden dauerhaft entfernt. Das kann nicht rückgängig gemacht werden.",
+    deleteAction: "Endgültig löschen",
+    deleting: "Wird gelöscht…",
+    cancel: "Abbrechen",
+    failed: "Das hat nicht geklappt. Bitte versuche es erneut.",
+  },
+  notFound: {
+    title: "Seite nicht gefunden",
+    body: "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    home: "Zurück zum Test",
+  },
+  errorPage: {
+    title: "Etwas ist schiefgelaufen",
+    body: "Ein unerwarteter Fehler ist aufgetreten. Versuche es erneut oder lade die Seite neu.",
+    retry: "Erneut versuchen",
+  },
+  legal: {
+    updated: "Zuletzt aktualisiert: {date}",
+    englishOnly: "Diese Seite ist auf Englisch und Türkisch verfügbar.",
+  },
+  skip: "Zum Inhalt springen",
   settings: {
     title: "Einstellungen",
     theme: "Design",

@@ -106,6 +106,7 @@ const es: Dictionary = {
     callbackFailed: "Este enlace de acceso no es válido o ha caducado.",
     tryAgain: "Intentar de nuevo",
     signedInAs: "Sesión iniciada como",
+    consent: "Al continuar aceptas los [Términos de uso] y la [Política de privacidad].",
   },
   leaderboard: {
     title: "Clasificación",
@@ -134,6 +135,43 @@ const es: Dictionary = {
     later: "Más tarde",
     change: "cambiar nombre de usuario",
   },
+  footer: {
+    privacy: "Privacidad",
+    terms: "Términos",
+    cookies: "Cookies",
+    contact: "Contacto",
+    rights: "Todos los derechos reservados.",
+  },
+  cookie: {
+    text: "Solo usamos el almacenamiento que el sitio necesita para funcionar: sin anuncios ni seguimiento.",
+    ok: "Entendido",
+    more: "Política de cookies",
+  },
+  account: {
+    download: "Descargar mis datos",
+    delete: "Eliminar cuenta",
+    deleteTitle: "¿Eliminar tu cuenta?",
+    deleteBody: "Tu correo, tu nombre de usuario y todos tus resultados se eliminarán para siempre. No se puede deshacer.",
+    deleteAction: "Eliminar definitivamente",
+    deleting: "Eliminando…",
+    cancel: "Cancelar",
+    failed: "No ha funcionado. Inténtalo de nuevo.",
+  },
+  notFound: {
+    title: "Página no encontrada",
+    body: "La página que buscas no existe o se ha movido.",
+    home: "Volver al test",
+  },
+  errorPage: {
+    title: "Algo salió mal",
+    body: "Se produjo un error inesperado. Inténtalo de nuevo o recarga la página.",
+    retry: "Intentar de nuevo",
+  },
+  legal: {
+    updated: "Última actualización: {date}",
+    englishOnly: "Esta página está disponible en inglés y turco.",
+  },
+  skip: "Saltar al contenido",
   settings: {
     title: "Ajustes",
     theme: "tema",

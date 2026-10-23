@@ -106,6 +106,7 @@ const tr: Dictionary = {
     callbackFailed: "Bu giriş bağlantısı geçersiz ya da süresi dolmuş.",
     tryAgain: "Tekrar dene",
     signedInAs: "Giriş yapılan hesap",
+    consent: "Devam ederek [Kullanım Koşulları]'nı ve [Gizlilik Politikası]'nı kabul etmiş olursun.",
   },
   leaderboard: {
     title: "Liderlik tablosu",
@@ -134,6 +135,43 @@ const tr: Dictionary = {
     later: "Sonra",
     change: "kullanıcı adını değiştir",
   },
+  footer: {
+    privacy: "Gizlilik",
+    terms: "Koşullar",
+    cookies: "Çerezler",
+    contact: "İletişim",
+    rights: "Tüm hakları saklıdır.",
+  },
+  cookie: {
+    text: "Yalnızca sitenin çalışması için gereken depolamayı kullanıyoruz – reklam ve takip yok.",
+    ok: "Anladım",
+    more: "Çerez politikası",
+  },
+  account: {
+    download: "Verilerimi indir",
+    delete: "Hesabı sil",
+    deleteTitle: "Hesabın silinsin mi?",
+    deleteBody: "E-posta adresin, kullanıcı adın ve tüm sonuçların kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+    deleteAction: "Kalıcı olarak sil",
+    deleting: "Siliniyor…",
+    cancel: "Vazgeç",
+    failed: "İşlem başarısız oldu. Lütfen tekrar dene.",
+  },
+  notFound: {
+    title: "Sayfa bulunamadı",
+    body: "Aradığın sayfa yok ya da taşınmış.",
+    home: "Teste dön",
+  },
+  errorPage: {
+    title: "Bir şeyler ters gitti",
+    body: "Beklenmedik bir hata oluştu. Tekrar dene ya da sayfayı yenile.",
+    retry: "Tekrar dene",
+  },
+  legal: {
+    updated: "Son güncelleme: {date}",
+    englishOnly: "Bu sayfa İngilizce ve Türkçe olarak mevcuttur.",
+  },
+  skip: "İçeriğe geç",
   settings: {
     title: "Ayarlar",
     theme: "tema",

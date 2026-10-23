@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, Loader2, Mail, MailCheck, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { GOOGLE_AUTH_ENABLED } from "@/lib/supabase";
@@ -138,10 +139,32 @@ export function AuthDialog() {
               </button>
               <p className="mt-3 text-center text-xs text-sub">{t.auth.noPassword}</p>
             </form>
+            <p className="mt-5 border-t border-line pt-4 text-center text-[0.7rem] leading-relaxed text-sub">
+              <ConsentText text={t.auth.consent} links={[`/${locale}/terms`, `/${locale}/privacy`]} onNavigate={close} />
+            </p>
           </>
         )}
       </div>
     </dialog>
+  );
+}
+
+/** Turns each [bracketed] phrase into a link, in order, so translations control the grammar around them. */
+function ConsentText({ text, links, onNavigate }: { text: string; links: string[]; onNavigate: () => void }) {
+  let i = 0;
+  return (
+    <>
+      {text.split(/(\[[^\]]+\])/).map((part, k) => {
+        const m = part.match(/^\[(.+)\]$/);
+        if (!m) return <span key={k}>{part}</span>;
+        const href = links[i++] ?? links[0];
+        return (
+          <Link key={k} href={href} onClick={onNavigate} className="text-text underline underline-offset-2 hover:text-main">
+            {m[1]}
+          </Link>
+        );
+      })}
+    </>
   );
 }
 

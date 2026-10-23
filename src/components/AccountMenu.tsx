@@ -1,10 +1,11 @@
 "use client";
 
-import { LogIn, LogOut, UserPen } from "lucide-react";
+import { Download, LogIn, LogOut, Trash2, UserPen } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
-import { signOut, useAuth } from "@/lib/sync";
+import { exportMyData, signOut, useAuth } from "@/lib/sync";
 import { useUi } from "@/lib/ui";
+import { DeleteAccountDialog } from "./DeleteAccountDialog";
 
 /** Sign-in button when signed out; avatar with a small menu when signed in. */
 export function AccountMenu() {
@@ -13,6 +14,7 @@ export function AccountMenu() {
   const openAuth = useUi((s) => s.setAuthOpen);
   const openUsername = useUi((s) => s.setUsernameOpen);
   const [open, setOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -85,14 +87,38 @@ export function AccountMenu() {
             role="menuitem"
             onClick={() => {
               setOpen(false);
+              void exportMyData();
+            }}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-text transition-colors hover:bg-line"
+          >
+            <Download size={15} /> {t.account.download}
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false);
               void signOut();
             }}
             className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-text transition-colors hover:bg-line"
           >
             <LogOut size={15} /> {t.auth.signOut}
           </button>
+          <div className="my-1 h-px bg-line" />
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false);
+              setDeleting(true);
+            }}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-error transition-colors hover:bg-error/10"
+          >
+            <Trash2 size={15} /> {t.account.delete}
+          </button>
         </div>
       )}
+      <DeleteAccountDialog open={deleting} onClose={() => setDeleting(false)} />
     </div>
   );
 }

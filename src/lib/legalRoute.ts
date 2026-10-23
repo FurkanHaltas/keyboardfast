@@ -1,0 +1,11 @@
+import type { Metadata } from "next";
+import { getLegalDoc, type LegalKind } from "@/content/legal";
+import { isLocale } from "@/i18n/config";
+
+/** Shared metadata for the privacy, cookies and terms pages. */
+export async function legalMetadata(kind: LegalKind, params: Promise<{ lang: string }>): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLocale(lang)) return {};
+  const { doc } = getLegalDoc(kind, lang);
+  return { title: doc.title, description: doc.intro.replace("{site}", "keyboardfast.com") };
+}

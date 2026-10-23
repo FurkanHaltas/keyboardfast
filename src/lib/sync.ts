@@ -198,6 +198,36 @@ export async function signOut() {
   await supabase().auth.signOut();
 }
 
+/** Everything we hold about the signed-in user, as a downloadable JSON file (data portability). */
+export async function exportMyData() {
+  const { user, profile } = useAuth.getState();
+  if (!user) return false;
+  const { data, error } = await supabase().from("results").select("*").order("created_at", { ascending: true });
+  if (error) return false;
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    account: { id: user.id, email: user.email, username: profile?.username ?? null },
+    results: data,
+  };
+  const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: "keyboardfast-data.json" });
+  a.click();
+  URL.revokeObjectURL(url);
+  return true;
+}
+
+/** Permanently deletes the account and all its results, then clears local copies. */
+export async function deleteMyAccount() {
+  const uid = useAuth.getState().user?.id;
+  if (!uid) return false;
+  const { error } = await supabase().rpc("delete_my_account");
+  if (error) return false;
+  writeHistory(uid, []);
+  writePending(uid, []);
+  await supabase().auth.signOut({ scope: "local" });
+  return true;
+}
+
 async function loadProfile(uid: string) {
   const { data, error } = await supabase().from("profiles").select("username").eq("id", uid).maybeSingle();
   if (error || useAuth.getState().user?.id !== uid) return;

@@ -104,6 +104,7 @@ const en = {
     callbackFailed: "This sign-in link is invalid or has expired.",
     tryAgain: "Try again",
     signedInAs: "Signed in as",
+    consent: "By continuing you agree to the [Terms of Use] and the [Privacy Policy].",
   },
   leaderboard: {
     title: "Leaderboard",
@@ -132,6 +133,43 @@ const en = {
     later: "Later",
     change: "change username",
   },
+  footer: {
+    privacy: "Privacy",
+    terms: "Terms",
+    cookies: "Cookies",
+    contact: "Contact",
+    rights: "All rights reserved.",
+  },
+  cookie: {
+    text: "We only use storage that the site needs to work – no ads, no tracking.",
+    ok: "Got it",
+    more: "Cookie policy",
+  },
+  account: {
+    download: "Download my data",
+    delete: "Delete account",
+    deleteTitle: "Delete your account?",
+    deleteBody: "Your email address, username and all results will be permanently removed. This cannot be undone.",
+    deleteAction: "Delete permanently",
+    deleting: "Deleting…",
+    cancel: "Cancel",
+    failed: "That didn't work. Please try again.",
+  },
+  notFound: {
+    title: "Page not found",
+    body: "The page you are looking for doesn't exist or has moved.",
+    home: "Back to the test",
+  },
+  errorPage: {
+    title: "Something went wrong",
+    body: "An unexpected error occurred. Try again, or reload the page.",
+    retry: "Try again",
+  },
+  legal: {
+    updated: "Last updated: {date}",
+    englishOnly: "This page is available in English and Turkish.",
+  },
+  skip: "Skip to content",
   settings: {
     title: "Settings",
     theme: "theme",
