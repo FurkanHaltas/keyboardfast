@@ -27,7 +27,8 @@ export function Header() {
     <header className="flex items-center justify-between gap-2 py-6 sm:gap-4 sm:py-8">
       <Link href={`/${locale}`} className="group flex items-center gap-2.5" aria-label="keyboardfast">
         <LogoMark />
-        <span className="text-lg font-semibold tracking-tight text-text sm:text-[1.35rem]">
+        {/* Brand name: keep browser translation from turning it into "klavye hızlı". */}
+        <span translate="no" className="notranslate text-lg font-semibold tracking-tight text-text sm:text-[1.35rem]">
           keyboard<span className="text-main transition-colors">fast</span>
         </span>
       </Link>

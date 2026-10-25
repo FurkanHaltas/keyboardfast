@@ -26,7 +26,11 @@ export function Footer() {
           {t.footer.contact}
         </a>
         <span>
-          © 2026 keyboardfast · {t.footer.rights}
+          © 2026{" "}
+          <span translate="no" className="notranslate">
+            keyboardfast
+          </span>{" "}
+          · {t.footer.rights}
         </span>
       </nav>
     </footer>
