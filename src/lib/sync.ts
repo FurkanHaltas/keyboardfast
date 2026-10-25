@@ -184,8 +184,15 @@ export function startAuth() {
   });
 }
 
-export async function signInWithEmail(email: string, redirectTo: string) {
-  const { error } = await supabase().auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } });
+/**
+ * Sends a magic link. `locale` is stored on new accounts so the email template can
+ * greet them in their language ({{ .Data.locale }} in the Supabase template).
+ */
+export async function signInWithEmail(email: string, redirectTo: string, locale: string) {
+  const { error } = await supabase().auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: redirectTo, data: { locale } },
+  });
   return error?.message ?? null;
 }
 

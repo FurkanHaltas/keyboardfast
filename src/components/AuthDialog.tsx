@@ -37,7 +37,7 @@ export function AuthDialog() {
       return;
     }
     setStep({ kind: "sending" });
-    const error = await signInWithEmail(value, redirectTo());
+    const error = await signInWithEmail(value, redirectTo(), locale);
     setStep(error ? { kind: "form", error: t.auth.error } : { kind: "sent", email: value });
   };
 
