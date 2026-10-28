@@ -8,7 +8,7 @@ import { InlineScript } from "@/components/InlineScript";
 import { SettingsBoot } from "@/components/SettingsBoot";
 import { getDictionary, isLocale, LOCALES } from "@/i18n/config";
 import { I18nProvider } from "@/i18n/I18nProvider";
-import { SITE_URL } from "@/lib/site";
+import { ADSENSE_CLIENT, SITE_URL } from "@/lib/site";
 import { SETTINGS_KEY } from "@/lib/storageKeys";
 import "../globals.css";
 
@@ -28,6 +28,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     title: { default: t.meta.title, template: `%s · keyboardfast` },
     description: t.meta.description,
     openGraph: { title: t.meta.title, description: t.meta.description, siteName: "keyboardfast", locale: lang },
+    // Verifies site ownership for AdSense without loading the ad script (that waits for consent).
+    other: { "google-adsense-account": ADSENSE_CLIENT },
   };
 }
 
