@@ -127,6 +127,8 @@ const tr: Dictionary = {
     consent: "Devam ederek [Kullanım Koşulları]'nı ve [Gizlilik Politikası]'nı kabul etmiş olursun.",
   },
   leaderboard: {
+    period: "dönem",
+    periods: { week: "Bu hafta", month: "Bu ay", all: "Tüm zamanlar" },
     title: "Liderlik tablosu",
     subtitle: "Her kategoride oyuncu başına en iyi sonuç.",
     metaDescription: "keyboardfast'te her mod, süre ve dilde en hızlı yazanları gör; giriş yap ve kendi en iyi sonucunu tabloya taşı.",

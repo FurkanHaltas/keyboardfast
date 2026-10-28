@@ -309,12 +309,21 @@ export interface LeaderboardRow {
   created_at: string;
 }
 
-export async function fetchLeaderboard(mode: string, mode2: string, lang: string | null): Promise<LeaderboardRow[] | null> {
+export type LeaderboardPeriod = "week" | "month" | "all";
+
+/** Weeks start Monday 00:00 UTC, months on the 1st (see the leaderboard() SQL function). */
+export async function fetchLeaderboard(
+  mode: string,
+  mode2: string,
+  lang: string | null,
+  period: LeaderboardPeriod = "all",
+): Promise<LeaderboardRow[] | null> {
   const { data, error } = await supabase().rpc("leaderboard", {
     p_mode: mode,
     p_mode2: mode2,
     p_lang: lang,
     p_limit: 50,
+    p_period: period,
   });
   if (error) return null;
   return (data as LeaderboardRow[]).map((r) => ({

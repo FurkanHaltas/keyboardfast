@@ -127,6 +127,8 @@ const es: Dictionary = {
     consent: "Al continuar aceptas los [Términos de uso] y la [Política de privacidad].",
   },
   leaderboard: {
+    period: "periodo",
+    periods: { week: "Esta semana", month: "Este mes", all: "Histórico" },
     title: "Clasificación",
     subtitle: "El mejor resultado de cada jugador en cada categoría.",
     metaDescription: "Descubre a los mecanógrafos más rápidos de keyboardfast en cada modo, duración e idioma, e inicia sesión para subir tu mejor resultado.",

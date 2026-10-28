@@ -127,6 +127,8 @@ const fr: Dictionary = {
     consent: "En continuant, vous acceptez les [Conditions d'utilisation] et la [Politique de confidentialité].",
   },
   leaderboard: {
+    period: "période",
+    periods: { week: "Cette semaine", month: "Ce mois-ci", all: "Depuis toujours" },
     title: "Classement",
     subtitle: "Meilleur résultat de chaque joueur dans chaque catégorie.",
     metaDescription: "Découvrez les dactylos les plus rapides de keyboardfast dans chaque mode, durée et langue, et connectez-vous pour y inscrire votre meilleur résultat.",

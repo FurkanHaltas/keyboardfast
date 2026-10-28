@@ -127,6 +127,8 @@ const pt: Dictionary = {
     consent: "Ao continuar, você aceita os [Termos de Uso] e a [Política de Privacidade].",
   },
   leaderboard: {
+    period: "período",
+    periods: { week: "Esta semana", month: "Este mês", all: "Todos os tempos" },
     title: "Ranking",
     subtitle: "O melhor resultado de cada jogador em cada categoria.",
     metaDescription: "Veja os digitadores mais rápidos do keyboardfast em cada modo, duração e idioma, e entre para colocar o seu melhor resultado no ranking.",

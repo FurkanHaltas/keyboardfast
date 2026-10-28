@@ -8,7 +8,7 @@ import { WORD_LANGUAGE_NAMES, WORD_LANGUAGES, type WordLanguage } from "@/conten
 import { useI18n } from "@/i18n/I18nProvider";
 import { resolveWordLang } from "@/lib/createTest";
 import { TIME_OPTIONS, useSettings, WORD_OPTIONS, type TestMode } from "@/lib/settings";
-import { fetchLeaderboard, useAuth, type LeaderboardRow } from "@/lib/sync";
+import { fetchLeaderboard, useAuth, type LeaderboardPeriod, type LeaderboardRow } from "@/lib/sync";
 import { useUi } from "@/lib/ui";
 
 interface Category {
@@ -30,16 +30,19 @@ export function LeaderboardView() {
   const [cat, setCat] = useState<Category>(() => {
     const s = useSettings.getState();
     if (s.mode === "code") return { mode: "code", mode2: s.codeLang, lang: resolveWordLang(s, locale) };
+    // Practice isn't ranked; fall back to the default timed board.
+    if (s.mode === "practice") return { mode: "time", mode2: "30", lang: resolveWordLang(s, locale) };
     return { mode: s.mode, mode2: String(s.mode === "time" ? s.time : s.words), lang: resolveWordLang(s, locale) };
   });
+  const [period, setPeriod] = useState<LeaderboardPeriod>("all");
   const [rows, setRows] = useState<LeaderboardRow[] | null | "error">(null);
 
-  const key = `${cat.mode}|${cat.mode2}|${cat.lang}|${user?.id ?? ""}`;
+  const key = `${cat.mode}|${cat.mode2}|${cat.lang}|${period}|${user?.id ?? ""}`;
   const [loadedKey, setLoadedKey] = useState("");
 
   useEffect(() => {
     let live = true;
-    void fetchLeaderboard(cat.mode, cat.mode2, cat.mode === "code" ? null : cat.lang).then((r) => {
+    void fetchLeaderboard(cat.mode, cat.mode2, cat.mode === "code" ? null : cat.lang, period).then((r) => {
       if (!live) return;
       setRows(r ?? "error");
       setLoadedKey(key);
@@ -47,7 +50,7 @@ export function LeaderboardView() {
     return () => {
       live = false;
     };
-  }, [cat, key]);
+  }, [cat, period, key]);
 
   const loading = loadedKey !== key;
 
@@ -68,11 +71,28 @@ export function LeaderboardView() {
 
   return (
     <div className="fade-up space-y-8 pb-12">
-      <div>
-        <h1 className="flex items-center gap-2.5 text-3xl font-semibold tracking-tight">
-          <Crown size={26} className="text-main" /> {t.leaderboard.title}
-        </h1>
-        <p className="mt-1 text-sm text-sub">{t.leaderboard.subtitle}</p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="flex items-center gap-2.5 text-3xl font-semibold tracking-tight">
+            <Crown size={26} className="text-main" /> {t.leaderboard.title}
+          </h1>
+          <p className="mt-1 text-sm text-sub">{t.leaderboard.subtitle}</p>
+        </div>
+        <div className="flex rounded-xl bg-raised p-1 text-[0.8rem]" role="group" aria-label={t.leaderboard.period}>
+          {(["week", "month", "all"] as const).map((p) => (
+            <button
+              key={p}
+              type="button"
+              aria-pressed={period === p}
+              onClick={() => setPeriod(p)}
+              className={`rounded-lg px-3 py-1.5 transition-colors ${
+                period === p ? "bg-bg text-main" : "text-sub hover:text-text"
+              }`}
+            >
+              {t.leaderboard.periods[p]}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-x-1 gap-y-1 rounded-xl bg-raised px-2 py-1.5 text-[0.8rem]">

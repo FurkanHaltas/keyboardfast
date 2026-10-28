@@ -125,6 +125,8 @@ const en = {
     consent: "By continuing you agree to the [Terms of Use] and the [Privacy Policy].",
   },
   leaderboard: {
+    period: "period",
+    periods: { week: "This week", month: "This month", all: "All time" },
     title: "Leaderboard",
     subtitle: "Best result per player in each category.",
     metaDescription: "See the fastest typists on keyboardfast in every mode, duration and language – and sign in to put your own best result on the board.",

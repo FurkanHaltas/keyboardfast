@@ -127,6 +127,8 @@ const de: Dictionary = {
     consent: "Mit dem Fortfahren akzeptierst du die [Nutzungsbedingungen] und die [Datenschutzerklärung].",
   },
   leaderboard: {
+    period: "Zeitraum",
+    periods: { week: "Diese Woche", month: "Dieser Monat", all: "Gesamt" },
     title: "Rangliste",
     subtitle: "Bestes Ergebnis pro Spieler in jeder Kategorie.",
     metaDescription: "Die schnellsten Tipper auf keyboardfast in jedem Modus, jeder Dauer und Sprache – melde dich an und bring dein bestes Ergebnis auf die Liste.",
