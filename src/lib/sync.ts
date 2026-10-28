@@ -32,6 +32,7 @@ interface Row {
   consistency: number;
   duration_ms: number;
   chars: HistoryEntry["chars"];
+  key_stats: HistoryEntry["keys"] | null;
 }
 
 const toRow = (e: HistoryEntry): Row => ({
@@ -48,6 +49,7 @@ const toRow = (e: HistoryEntry): Row => ({
   consistency: e.consistency,
   duration_ms: e.durationMs,
   chars: e.chars,
+  key_stats: e.keys ?? null,
 });
 
 const fromRow = (r: Row): HistoryEntry => ({
@@ -64,6 +66,7 @@ const fromRow = (r: Row): HistoryEntry => ({
   consistency: Number(r.consistency),
   durationMs: r.duration_ms,
   chars: r.chars,
+  ...(r.key_stats && { keys: r.key_stats }),
 });
 
 // Results that were saved while offline (or whose upload failed) wait here until the next flush.

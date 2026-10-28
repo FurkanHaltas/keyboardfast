@@ -3,15 +3,17 @@
 import { MousePointerClick, RotateCcw, TriangleAlert } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useShallow } from "zustand/react/shallow";
+import { summarizeKeys } from "@/engine/stats";
 import type { TestResult } from "@/engine/types";
 import { useI18n } from "@/i18n/I18nProvider";
-import { createTest, repeatTest, type TestSetup } from "@/lib/createTest";
+import { createTest, repeatTest, resolveWordLang, type TestSetup } from "@/lib/createTest";
 import { compare, getHistorySnapshot, isSavable, type Comparison, type HistoryEntry } from "@/lib/history";
 import { modeLabel } from "@/lib/modeLabel";
 import { useSettings, useSettingsReady } from "@/lib/settings";
 import { saveResult, submitForVerification, useAuth } from "@/lib/sync";
 import { onTicket, takeTicket } from "@/lib/tickets";
 import { useUi } from "@/lib/ui";
+import { analyzeWeakness } from "@/lib/weakness";
 import { ConfigBar } from "./ConfigBar";
 import { Results } from "./Results";
 import { WordsView } from "./WordsView";
@@ -60,8 +62,10 @@ export function TypingTest() {
       if (kind === "repeat" && prev) next = repeatTest(prev);
       else {
         // Signed-in users get a server-issued seed so the result can be verified for the leaderboard.
-        const ticket = useAuth.getState().user ? takeTicket() : null;
-        next = createTest(s, locale, prev ?? undefined, ticket?.seed);
+        // Practice text is personal, so it is never verified or ranked.
+        const ticket = useAuth.getState().user && s.mode !== "practice" ? takeTicket() : null;
+        const focus = s.mode === "practice" ? practiceFocus(resolveWordLang(s, locale)) : undefined;
+        next = createTest(s, locale, prev ?? undefined, ticket?.seed, focus);
         if (ticket) next.ticket = ticket.ticket;
       }
       setupRef.current = next;
@@ -85,7 +89,7 @@ export function TypingTest() {
     () =>
       onTicket(() => {
         const cur = setupRef.current;
-        if (cur && !cur.ticket && cur.engine.status === "idle" && useAuth.getState().user) start();
+        if (cur && !cur.ticket && cur.mode !== "practice" && cur.engine.status === "idle" && useAuth.getState().user) start();
       }),
     [start],
   );
@@ -129,6 +133,7 @@ export function TypingTest() {
       consistency: r.consistency,
       durationMs: r.durationMs,
       chars: r.chars,
+      keys: summarizeKeys(r),
     };
     const saved = isSavable(r.durationMs, r.wpm);
     let comparison: Comparison | null = null;
@@ -224,7 +229,7 @@ export function TypingTest() {
 
   return (
     <div className="flex flex-1 flex-col justify-center gap-10 pb-16">
-      <ConfigBar onChange={focusInput} hidden={running} />
+      <ConfigBar onChange={focusInput} hidden={running} focus={setup.mode === "practice" ? setup.focus : undefined} />
 
       <div className="relative">
         <div className="mb-3 flex h-8 items-end justify-between font-mono text-2xl">
@@ -282,7 +287,16 @@ export function TypingTest() {
           <RotateCcw size={20} />
         </button>
         {mode === "code" && <p className="text-xs text-sub">{t.test.autoIndent}</p>}
+        {mode === "practice" && !setup.focus?.keys.length && !setup.focus?.bigrams.length && (
+          <p className="max-w-md text-center text-xs text-sub">{t.test.practiceNoData}</p>
+        )}
       </div>
     </div>
   );
+}
+
+/** Weak letters and slow pairs for practice text, from this device's/account's recent tests. */
+function practiceFocus(lang: string) {
+  const w = analyzeWeakness(getHistorySnapshot(), lang);
+  return { keys: w.weakKeys, bigrams: w.slowBigrams };
 }

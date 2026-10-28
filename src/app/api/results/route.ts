@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { summarizeKeys } from "@/engine/stats";
 import type { TestConfig } from "@/lib/createTest";
 import { supabaseAdmin } from "@/server/supabaseAdmin";
 import { readTicket, TICKET_TTL_MS } from "@/server/ticket";
@@ -82,6 +83,7 @@ export async function POST(req: NextRequest) {
       consistency: r.consistency,
       duration_ms: Math.round(r.durationMs),
       chars: r.chars,
+      key_stats: summarizeKeys(r),
       verified: true,
       ticket_nonce: ticket.nonce,
     },

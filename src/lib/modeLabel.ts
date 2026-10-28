@@ -7,7 +7,7 @@ type ModeInfo = Pick<HistoryEntry, "mode" | "mode2" | "lang" | "punctuation" | "
 
 export function modeLabel(e: ModeInfo, t: Dictionary) {
   if (e.mode === "code") return `${t.config.code} · ${CODE_LANGUAGE_NAMES[e.mode2 as CodeLanguage] ?? e.mode2}`;
-  const parts = [`${t.config[e.mode]} ${e.mode2}`];
+  const parts = [e.mode === "practice" ? t.config.practice : `${t.config[e.mode]} ${e.mode2}`];
   if (e.lang) parts.push(WORD_LANGUAGE_NAMES[e.lang as WordLanguage] ?? e.lang);
   const extras = `${e.punctuation ? "@" : ""}${e.numbers ? "#" : ""}`;
   if (extras) parts.push(extras);

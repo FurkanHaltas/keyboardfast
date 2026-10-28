@@ -39,6 +39,23 @@ export interface KeyStat {
   avgMs: number;
 }
 
+export interface BigramStat {
+  /** two consecutive letters, e.g. "th" */
+  pair: string;
+  count: number;
+  /** mean ms from the first letter to the second, both typed correctly */
+  avgMs: number;
+}
+
+/**
+ * Compact per-test key data kept with each result so weak keys can be found across tests:
+ * k: key -> [hits, misses, avgMs], b: bigram -> [count, avgMs].
+ */
+export interface KeySummary {
+  k: Record<string, [number, number, number]>;
+  b: Record<string, [number, number]>;
+}
+
 export interface ClassStat {
   cls: CharClass;
   total: number;
@@ -56,5 +73,6 @@ export interface TestResult {
   chars: CharCounts;
   samples: SecondSample[];
   keys: KeyStat[];
+  bigrams: BigramStat[];
   classes: ClassStat[];
 }

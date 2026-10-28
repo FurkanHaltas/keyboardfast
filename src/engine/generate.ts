@@ -83,3 +83,30 @@ export function codeToWords(code: string): Word[] {
   }
   return words;
 }
+
+/**
+ * Practice text: words are drawn with extra weight for each weak letter and slow letter
+ * pair they contain, so the weak spots come up often while the text stays real words.
+ */
+export function createPracticeStream(list: readonly string[], focus: { keys: string[]; bigrams: string[] }, rng: Rng = Math.random) {
+  const weights = list.map((w) => {
+    let weight = 1;
+    for (const k of focus.keys) if (w.includes(k)) weight += 3 * w.split(k).length - 3;
+    for (const b of focus.bigrams) if (w.includes(b)) weight += 4;
+    return weight;
+  });
+  const total = weights.reduce((a, b) => a + b, 0);
+  let prev = "";
+  const next = (): Word => {
+    let w = prev;
+    for (let tries = 0; tries < 4 && w === prev; tries++) {
+      let r = rng() * total;
+      let i = 0;
+      while (r >= weights[i] && i < weights.length - 1) r -= weights[i++];
+      w = list[i];
+    }
+    prev = w;
+    return { text: w, sep: " ", indent: "" };
+  };
+  return (count: number): Word[] => Array.from({ length: count }, next);
+}

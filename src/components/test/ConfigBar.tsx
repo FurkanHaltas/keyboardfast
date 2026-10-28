@@ -1,14 +1,14 @@
 "use client";
 
-import { AtSign, CaseSensitive, Clock3, Code2, Globe, Hash, Terminal } from "lucide-react";
+import { AtSign, CaseSensitive, Clock3, Code2, Crosshair, Globe, Hash, Terminal } from "lucide-react";
 import { Menu } from "@/components/Menu";
 import { CODE_LANGUAGE_NAMES, CODE_LANGUAGES } from "@/content/code";
 import { WORD_LANGUAGE_NAMES, WORD_LANGUAGES } from "@/content/words";
 import { useI18n } from "@/i18n/I18nProvider";
-import { resolveWordLang } from "@/lib/createTest";
+import { resolveWordLang, type PracticeFocus } from "@/lib/createTest";
 import { TIME_OPTIONS, useSettings, WORD_OPTIONS, type Settings, type TestMode } from "@/lib/settings";
 
-export function ConfigBar({ onChange, hidden }: { onChange: () => void; hidden: boolean }) {
+export function ConfigBar({ onChange, hidden, focus }: { onChange: () => void; hidden: boolean; focus?: PracticeFocus }) {
   const { t, locale } = useI18n();
   const s = useSettings();
   const update = (patch: Partial<Settings>) => {
@@ -20,6 +20,7 @@ export function ConfigBar({ onChange, hidden }: { onChange: () => void; hidden: 
     { id: "time", label: t.config.time, icon: <Clock3 size={15} /> },
     { id: "words", label: t.config.words, icon: <CaseSensitive size={17} /> },
     { id: "code", label: t.config.code, icon: <Code2 size={15} /> },
+    { id: "practice", label: t.config.practice, icon: <Crosshair size={15} /> },
   ];
 
   return (
@@ -29,7 +30,7 @@ export function ConfigBar({ onChange, hidden }: { onChange: () => void; hidden: 
       }`}
       aria-hidden={hidden || undefined}
     >
-      {s.mode !== "code" && (
+      {(s.mode === "time" || s.mode === "words") && (
         <>
           <Pill active={s.punctuation} onClick={() => update({ punctuation: !s.punctuation })} aria-pressed={s.punctuation}>
             <AtSign size={14} /> {t.config.punctuation}
@@ -60,6 +61,8 @@ export function ConfigBar({ onChange, hidden }: { onChange: () => void; hidden: 
             {v}
           </Pill>
         ))}
+
+      {s.mode === "practice" && <FocusKeys focus={focus} label={t.test.practiceFocus} />}
 
       {s.mode === "code" ? (
         <Menu
@@ -98,6 +101,25 @@ function Pill({ active, children, ...rest }: { active: boolean } & React.ButtonH
     >
       {children}
     </button>
+  );
+}
+
+/** The weak letters and pairs the current practice text drills; a dash until there is data. */
+function FocusKeys({ focus, label }: { focus?: PracticeFocus; label: string }) {
+  const items = [...(focus?.keys ?? []), ...(focus?.bigrams ?? [])];
+  return (
+    <span className="flex items-center gap-1.5 px-2 text-sub">
+      {label}
+      {items.length ? (
+        items.map((k) => (
+          <kbd key={k} className="rounded-md bg-bg px-1.5 py-0.5 font-mono text-[0.75rem] text-main">
+            {k}
+          </kbd>
+        ))
+      ) : (
+        <span aria-hidden>–</span>
+      )}
+    </span>
   );
 }
 

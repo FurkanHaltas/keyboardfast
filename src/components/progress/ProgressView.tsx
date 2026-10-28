@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { LineChart } from "@/components/charts/LineChart";
 import { Menu } from "@/components/Menu";
+import { KeyHeatmap } from "./KeyHeatmap";
 import { fmt } from "@/i18n/config";
 import { useI18n } from "@/i18n/I18nProvider";
 import { getHistorySnapshot, modeKey, readHistory, subscribeHistory, type HistoryEntry } from "@/lib/history";
@@ -148,6 +149,8 @@ export function ProgressView() {
           tooltipTitle={tooltipTitle}
         />
       </ChartCard>
+
+      <KeyHeatmap history={history} />
 
       <section>
         <h2 className="mb-3 text-sm font-medium">{t.progress.recent}</h2>

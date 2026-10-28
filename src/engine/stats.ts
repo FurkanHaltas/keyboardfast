@@ -1,8 +1,10 @@
 import type {
+  BigramStat,
   CharClass,
   CharCounts,
   ClassStat,
   KeyStat,
+  KeySummary,
   Keystroke,
   SecondSample,
   TestResult,
@@ -93,6 +95,33 @@ export function keyStats(strokes: Keystroke[]): KeyStat[] {
   }));
 }
 
+/** Timing of letter pairs typed back to back without a mistake or a pause. */
+export function bigramStats(strokes: Keystroke[]): BigramStat[] {
+  const map = new Map<string, { n: number; ms: number }>();
+  for (let i = 1; i < strokes.length; i++) {
+    const a = strokes[i - 1];
+    const b = strokes[i];
+    if (!a.correct || !b.correct || classify(a.expected) !== "letter" || classify(b.expected) !== "letter") continue;
+    const dt = b.t - a.t;
+    if (dt >= PAUSE_MS) continue;
+    const pair = (a.expected + b.expected).toLowerCase();
+    const e = map.get(pair) ?? { n: 0, ms: 0 };
+    e.n++;
+    e.ms += dt;
+    map.set(pair, e);
+  }
+  return [...map.entries()].map(([pair, e]) => ({ pair, count: e.n, avgMs: round(e.ms / e.n) }));
+}
+
+/** Compacts a result's key data for storage (keeps the 40 most frequent bigrams). */
+export function summarizeKeys(r: Pick<TestResult, "keys" | "bigrams">): KeySummary {
+  const k: KeySummary["k"] = {};
+  for (const s of r.keys) k[s.key] = [s.hits, s.misses, s.avgMs];
+  const b: KeySummary["b"] = {};
+  for (const s of [...r.bigrams].sort((x, y) => y.count - x.count).slice(0, 40)) b[s.pair] = [s.count, s.avgMs];
+  return { k, b };
+}
+
 export function classStats(strokes: Keystroke[]): ClassStat[] {
   const acc = new Map<CharClass, { total: number; errors: number; ms: number; n: number }>();
   strokes.forEach((s, i) => {
@@ -142,6 +171,7 @@ export function buildResult(args: {
     chars: countChars(words, typed, index, true),
     samples,
     keys: keyStats(strokes),
+    bigrams: bigramStats(strokes),
     classes: classStats(strokes),
   };
 }

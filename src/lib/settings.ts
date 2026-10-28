@@ -7,7 +7,10 @@ import type { CodeLanguage } from "@/content/code";
 import type { WordLanguage } from "@/content/words";
 import { SETTINGS_KEY } from "./storageKeys";
 
-export type TestMode = "time" | "words" | "code";
+/** "practice" builds text around the user's weak keys (see src/lib/weakness.ts). */
+export type TestMode = "time" | "words" | "code" | "practice";
+/** Practice tests have a fixed length. */
+export const PRACTICE_WORDS = 50;
 export const TIME_OPTIONS = [15, 30, 60, 120] as const;
 export const WORD_OPTIONS = [10, 25, 50, 100] as const;
 

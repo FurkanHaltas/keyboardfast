@@ -1,4 +1,4 @@
-import type { CharCounts } from "@/engine/types";
+import type { CharCounts, KeySummary } from "@/engine/types";
 import type { TestMode } from "./settings";
 import { HISTORY_KEY } from "./storageKeys";
 
@@ -19,6 +19,8 @@ export interface HistoryEntry {
   consistency: number;
   durationMs: number;
   chars: CharCounts;
+  /** per-key and bigram data for finding weak keys; absent on results saved before it existed */
+  keys?: KeySummary;
 }
 
 /** Results are only comparable within the same mode configuration. */

@@ -1,9 +1,9 @@
 import { pickSnippet, snippetAt } from "@/content/code";
 import { getWordList, WORD_LANGUAGES, type WordLanguage } from "@/content/words";
 import { TypingEngine } from "@/engine/engine";
-import { codeToWords, createWordStream, mulberry32 } from "@/engine/generate";
+import { codeToWords, createPracticeStream, createWordStream, mulberry32 } from "@/engine/generate";
 import type { Word } from "@/engine/types";
-import type { Settings, TestMode } from "./settings";
+import { PRACTICE_WORDS, type Settings, type TestMode } from "./settings";
 
 /** Everything that defines a test's text. Shared with the server, which rebuilds tests to verify them. */
 export interface TestConfig {
@@ -17,6 +17,13 @@ export interface TestConfig {
   seed?: number;
   /** code mode: index of the snippet in its language */
   snippet?: number;
+  /** practice mode: weak letters and slow letter pairs to drill */
+  focus?: PracticeFocus;
+}
+
+export interface PracticeFocus {
+  keys: string[];
+  bigrams: string[];
 }
 
 export interface TestSetup extends TestConfig {
@@ -44,6 +51,10 @@ export function buildTest(cfg: TestConfig): Omit<TestSetup, "ticket"> | null {
   const count = Number(cfg.mode2);
   if (!Number.isInteger(count) || count < 1 || count > 1000) return null;
   const rng = cfg.seed === undefined ? undefined : mulberry32(cfg.seed);
+  if (cfg.mode === "practice") {
+    const words = createPracticeStream(getWordList(cfg.lang), cfg.focus ?? { keys: [], bigrams: [] }, rng)(count);
+    return { ...cfg, engine: new TypingEngine({ words, limit: { kind: "words" } }), words };
+  }
   const stream = createWordStream(getWordList(cfg.lang), {
     locale: cfg.lang,
     punctuation: cfg.punctuation,
@@ -59,10 +70,18 @@ export function buildTest(cfg: TestConfig): Omit<TestSetup, "ticket"> | null {
   return { ...cfg, engine: new TypingEngine({ words, limit: { kind: "words" } }), words };
 }
 
-export function createTest(s: Settings, uiLocale: string, prev?: TestSetup, seed?: number): TestSetup {
+export function createTest(
+  s: Settings,
+  uiLocale: string,
+  prev?: TestSetup,
+  seed?: number,
+  focus?: PracticeFocus,
+): TestSetup {
   const base = { punctuation: false, numbers: false, seed };
   const cfg: TestConfig =
-    s.mode === "code"
+    s.mode === "practice"
+      ? { ...base, mode: "practice", mode2: String(PRACTICE_WORDS), lang: resolveWordLang(s, uiLocale), focus }
+      : s.mode === "code"
       ? {
           ...base,
           mode: "code",
