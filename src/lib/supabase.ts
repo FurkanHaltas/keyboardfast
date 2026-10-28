@@ -9,6 +9,9 @@ const KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "sb_publishable_
 /** Google sign-in stays hidden until the provider is configured in the Supabase dashboard. */
 export const GOOGLE_AUTH_ENABLED = true;
 
+/** Public OAuth client ID (not a secret), used by Google's own sign-in button. */
+export const GOOGLE_CLIENT_ID = "1018265128388-h3ilirfogl7blha9fgb6rvj0bgs5k6ir.apps.googleusercontent.com";
+
 let client: SupabaseClient | null = null;
 
 /** Browser-only singleton. The session lives in localStorage; PKCE codes in the URL are exchanged automatically. */

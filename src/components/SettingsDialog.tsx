@@ -51,14 +51,8 @@ export function SettingsDialog() {
             </button>
           </div>
 
-          <p className="mb-3 text-xs font-medium uppercase tracking-wider text-sub">
-            {t.settings.theme}
-          </p>
-          <div
-            className="mb-7 grid grid-cols-3 gap-2"
-            role="radiogroup"
-            aria-label={t.settings.theme}
-          >
+          <p className="mb-3 text-xs font-medium uppercase tracking-wider text-sub">{t.settings.theme}</p>
+          <div className="mb-7 grid grid-cols-3 gap-2" role="radiogroup" aria-label={t.settings.theme}>
             {THEMES.map((th) => {
               const [bg, main, text] = SWATCH[th];
               const active = s.theme === th;
@@ -75,26 +69,15 @@ export function SettingsDialog() {
                   }`}
                 >
                   {th}
-                  <span
-                    className="size-3 rounded-full"
-                    style={{ background: main }}
-                  />
+                  <span className="size-3 rounded-full" style={{ background: main }} />
                 </button>
               );
             })}
           </div>
 
           <div className="space-y-1">
-            <Toggle
-              label={t.settings.liveWpm}
-              value={s.liveWpm}
-              onChange={(v) => s.set({ liveWpm: v })}
-            />
-            <Toggle
-              label={t.settings.smoothCaret}
-              value={s.smoothCaret}
-              onChange={(v) => s.set({ smoothCaret: v })}
-            />
+            <Toggle label={t.settings.liveWpm} value={s.liveWpm} onChange={(v) => s.set({ liveWpm: v })} />
+            <Toggle label={t.settings.smoothCaret} value={s.smoothCaret} onChange={(v) => s.set({ smoothCaret: v })} />
           </div>
         </div>
       )}
@@ -102,15 +85,7 @@ export function SettingsDialog() {
   );
 }
 
-function Toggle({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: boolean;
-  onChange: (v: boolean) => void;
-}) {
+function Toggle({ label, value, onChange }: { label: string; value: boolean; onChange: (v: boolean) => void }) {
   return (
     <label className="flex cursor-pointer items-center justify-between rounded-lg py-2 text-sm">
       <span>{label}</span>

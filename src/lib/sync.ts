@@ -201,6 +201,16 @@ export async function signInWithGoogle(redirectTo: string) {
   return error?.message ?? null;
 }
 
+/**
+ * Signs in with an ID token from Google's own button (Google Identity Services), whose
+ * dialog shows the site's name instead of the Supabase domain the redirect flow shows.
+ * `nonce` is the raw value; Google was given its SHA-256 hash.
+ */
+export async function signInWithGoogleIdToken(token: string, nonce: string) {
+  const { error } = await supabase().auth.signInWithIdToken({ provider: "google", token, nonce });
+  return error?.message ?? null;
+}
+
 export async function signOut() {
   await supabase().auth.signOut();
 }
