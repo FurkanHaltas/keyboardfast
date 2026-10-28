@@ -5,4 +5,4 @@ export const OWNER_NAME = "Furkan Haltas";
 export const CONTACT_EMAIL = "contact@keyboardfast.com";
 
 /** Bump when the legal texts change. */
-export const LEGAL_UPDATED = "2026-10-24";
+export const LEGAL_UPDATED = "2026-10-28";

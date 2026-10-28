@@ -35,6 +35,7 @@ const en: Docs = {
         heading: "Data we process when you create an account",
         body: [
           "Email address – to sign you in with a one-time link and to identify your account.",
+          "If you choose \"Continue with Google\", Google shares your email address, name, profile picture and account ID with us. We use only the email address and account ID to sign you in; we never receive your Google password.",
           "Username – the public name you choose; it is shown on the leaderboard together with your best scores.",
           "Test results – speed (WPM), accuracy, consistency, character counts, test mode and language, and the date and time of each test.",
           "We do not collect your keystroke text, passwords (sign-in is passwordless), payment data or precise location.",
@@ -59,7 +60,8 @@ const en: Docs = {
         body: [
           "Supabase Inc. hosts our database and sign-in system. Your account data is stored in its European Union (Frankfurt, Germany) region.",
           "Our virtual server provider hosts the website itself.",
-          "Sign-in emails are delivered through Supabase's email service.",
+          "Sign-in emails are delivered by Resend Inc. from noreply@keyboardfast.com.",
+          "If you sign in with Google, Google LLC (Google Ireland Ltd. for users in Europe) confirms your identity under its own privacy policy.",
           "These providers process data only on our instructions. Because some of them are established outside Turkey, using an account may involve transferring personal data abroad; this happens only to the extent needed to provide the service and under appropriate safeguards required by KVKK art. 9 and GDPR chapter V.",
         ],
       },
@@ -198,6 +200,7 @@ const tr: Docs = {
         heading: "Hesap açtığınızda işlenen veriler",
         body: [
           "E-posta adresi – tek kullanımlık bağlantıyla giriş yapmanız ve hesabınızın tanınması için.",
+          "\"Google ile devam et\" seçeneğini kullanırsanız Google; e-posta adresinizi, adınızı, profil fotoğrafınızı ve hesap kimliğinizi bizimle paylaşır. Bunlardan yalnızca e-posta adresini ve hesap kimliğini giriş için kullanırız; Google şifrenizi hiçbir zaman almayız.",
           "Kullanıcı adı – seçtiğiniz herkese açık ad; liderlik tablosunda en iyi skorlarınızla birlikte gösterilir.",
           "Test sonuçları – hız (WPM), doğruluk, tutarlılık, karakter sayıları, test modu ve dili ile her testin tarih ve saati.",
           "Yazdığınız metni, şifre (giriş şifresizdir), ödeme bilgisi ya da hassas konum bilgisi toplamıyoruz.",
@@ -222,7 +225,8 @@ const tr: Docs = {
         body: [
           "Veritabanımız ve giriş sistemimiz Supabase Inc. tarafından barındırılır. Hesap verileriniz Avrupa Birliği (Frankfurt, Almanya) bölgesinde saklanır.",
           "Web sitesinin kendisi sanal sunucu sağlayıcımızda çalışır.",
-          "Giriş e-postaları Supabase'in e-posta hizmeti üzerinden gönderilir.",
+          "Giriş e-postaları Resend Inc. tarafından noreply@keyboardfast.com adresinden gönderilir.",
+          "Google ile giriş yaparsanız kimliğinizi Google LLC (Avrupa'daki kullanıcılar için Google Ireland Ltd.) kendi gizlilik politikası kapsamında doğrular.",
           "Bu sağlayıcılar verileri yalnızca bizim talimatlarımızla işler. Bazıları Türkiye dışında yerleşik olduğundan hesap kullanımı kişisel verilerin yurt dışına aktarılmasını içerebilir; bu aktarım yalnızca hizmetin sunulması için gerekli ölçüde ve KVKK m. 9 ile GDPR V. bölümde öngörülen güvencelere uygun olarak yapılır.",
         ],
       },

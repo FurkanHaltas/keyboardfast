@@ -7,7 +7,7 @@ const URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://tncfwqukhuejssrldjb
 const KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "sb_publishable_9pxctFIFJMiXegedBEYs2g_lrfiyBWY";
 
 /** Google sign-in stays hidden until the provider is configured in the Supabase dashboard. */
-export const GOOGLE_AUTH_ENABLED = false;
+export const GOOGLE_AUTH_ENABLED = true;
 
 let client: SupabaseClient | null = null;
 
