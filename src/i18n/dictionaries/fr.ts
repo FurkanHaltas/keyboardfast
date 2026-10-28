@@ -111,6 +111,7 @@ const fr: Dictionary = {
   leaderboard: {
     title: "Classement",
     subtitle: "Meilleur résultat de chaque joueur dans chaque catégorie.",
+    metaDescription: "Découvrez les dactylos les plus rapides de keyboardfast dans chaque mode, durée et langue, et connectez-vous pour y inscrire votre meilleur résultat.",
     rank: "#",
     player: "joueur",
     date: "date",

@@ -111,6 +111,7 @@ const tr: Dictionary = {
   leaderboard: {
     title: "Liderlik tablosu",
     subtitle: "Her kategoride oyuncu başına en iyi sonuç.",
+    metaDescription: "keyboardfast'te her mod, süre ve dilde en hızlı yazanları gör; giriş yap ve kendi en iyi sonucunu tabloya taşı.",
     rank: "#",
     player: "oyuncu",
     date: "tarih",

@@ -111,6 +111,7 @@ const de: Dictionary = {
   leaderboard: {
     title: "Rangliste",
     subtitle: "Bestes Ergebnis pro Spieler in jeder Kategorie.",
+    metaDescription: "Die schnellsten Tipper auf keyboardfast in jedem Modus, jeder Dauer und Sprache – melde dich an und bring dein bestes Ergebnis auf die Liste.",
     rank: "#",
     player: "Spieler",
     date: "Datum",

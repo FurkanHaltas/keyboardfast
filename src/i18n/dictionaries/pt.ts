@@ -111,6 +111,7 @@ const pt: Dictionary = {
   leaderboard: {
     title: "Ranking",
     subtitle: "O melhor resultado de cada jogador em cada categoria.",
+    metaDescription: "Veja os digitadores mais rápidos do keyboardfast em cada modo, duração e idioma, e entre para colocar o seu melhor resultado no ranking.",
     rank: "#",
     player: "jogador",
     date: "data",

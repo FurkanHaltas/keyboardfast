@@ -27,10 +27,6 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     metadataBase: new URL(SITE_URL),
     title: { default: t.meta.title, template: `%s · keyboardfast` },
     description: t.meta.description,
-    alternates: {
-      canonical: `/${lang}`,
-      languages: Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])),
-    },
     openGraph: { title: t.meta.title, description: t.meta.description, siteName: "keyboardfast", locale: lang },
   };
 }

@@ -111,6 +111,7 @@ const es: Dictionary = {
   leaderboard: {
     title: "Clasificación",
     subtitle: "El mejor resultado de cada jugador en cada categoría.",
+    metaDescription: "Descubre a los mecanógrafos más rápidos de keyboardfast en cada modo, duración e idioma, e inicia sesión para subir tu mejor resultado.",
     rank: "#",
     player: "jugador",
     date: "fecha",
