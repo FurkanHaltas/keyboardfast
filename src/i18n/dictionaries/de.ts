@@ -181,7 +181,7 @@ const de: Dictionary = {
   },
   legal: {
     updated: "Zuletzt aktualisiert: {date}",
-    englishOnly: "Diese Seite ist auf Englisch und Türkisch verfügbar.",
+    translationNote: "Dies ist eine Übersetzung zur besseren Verständlichkeit. Bei Abweichungen gilt die englische oder türkische Fassung.",
   },
   skip: "Zum Inhalt springen",
   settings: {

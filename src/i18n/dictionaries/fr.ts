@@ -181,7 +181,7 @@ const fr: Dictionary = {
   },
   legal: {
     updated: "Dernière mise à jour : {date}",
-    englishOnly: "Cette page est disponible en anglais et en turc.",
+    translationNote: "Ceci est une traduction fournie pour votre confort. En cas de divergence, la version anglaise ou turque fait foi.",
   },
   skip: "Aller au contenu",
   settings: {

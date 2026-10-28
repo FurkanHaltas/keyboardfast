@@ -26,14 +26,14 @@ function Text({ value }: { value: string }) {
 
 export async function LegalPage({ kind, locale }: { kind: LegalKind; locale: Locale }) {
   const t = await getDictionary(locale);
-  const { doc, fallback } = getLegalDoc(kind, locale);
+  const { doc, translated } = getLegalDoc(kind, locale);
   const updated = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(LEGAL_UPDATED));
 
   return (
-    <article className="fade-up mx-auto w-full max-w-2xl pb-16" lang={fallback ? "en" : locale}>
-      {fallback && (
-        <p className="mb-6 flex items-center gap-2 rounded-xl bg-raised px-4 py-3 text-sm text-sub" lang={locale}>
-          <Languages size={16} className="shrink-0 text-main" /> {t.legal.englishOnly}
+    <article className="fade-up mx-auto w-full max-w-2xl pb-16" lang={locale}>
+      {translated && (
+        <p className="mb-6 flex items-center gap-2 rounded-xl bg-raised px-4 py-3 text-sm text-sub">
+          <Languages size={16} className="shrink-0 text-main" /> {t.legal.translationNote}
         </p>
       )}
       <h1 className="text-3xl font-semibold tracking-tight">{doc.title}</h1>

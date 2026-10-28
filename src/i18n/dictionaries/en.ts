@@ -179,7 +179,7 @@ const en = {
   },
   legal: {
     updated: "Last updated: {date}",
-    englishOnly: "This page is available in English and Turkish.",
+    translationNote: "This is a translation for convenience. If versions differ, the English or Turkish text prevails.",
   },
   skip: "Skip to content",
   settings: {

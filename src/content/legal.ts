@@ -1,7 +1,12 @@
 /**
- * Legal texts. Full versions exist in English and Turkish; other interface languages
- * show the English text with a notice. Placeholders: {owner}, {email}, {site}.
+ * Legal texts. English and Turkish are the authoritative versions; German, Spanish, French
+ * and Portuguese are translations of the English text (legal-*.ts) shown with a notice.
+ * Placeholders: {owner}, {email}, {site}.
  */
+import { de } from "./legal-de";
+import { es } from "./legal-es";
+import { fr } from "./legal-fr";
+import { pt } from "./legal-pt";
 
 export type LegalKind = "privacy" | "cookies" | "terms";
 
@@ -11,7 +16,7 @@ export interface LegalDoc {
   sections: { heading: string; body: string[] }[];
 }
 
-type Docs = Record<LegalKind, LegalDoc>;
+export type Docs = Record<LegalKind, LegalDoc>;
 
 const en: Docs = {
   privacy: {
@@ -37,7 +42,7 @@ const en: Docs = {
           "Email address – to sign you in with a one-time link and to identify your account.",
           "If you choose \"Continue with Google\", Google shares your email address, name, profile picture and account ID with us. We use only the email address and account ID to sign you in; we never receive your Google password.",
           "Username – the public name you choose; it is shown on the leaderboard together with your best scores.",
-          "Test results – speed (WPM), accuracy, consistency, character counts, test mode and language, and the date and time of each test.",
+          "Test results – speed (WPM), accuracy, consistency, character counts, test mode and language, the date and time of each test, and a compact per-key summary (hits, misses, average time) used to show your weak keys.",
           "Test verification – when you finish a test while signed in, the keys you pressed in that test and their timing are sent to our server once, so it can recalculate the score and check that it wasn't produced by a script. Only the resulting score is stored; the keystroke log is discarded immediately. It covers the test text only, nothing else you type.",
           "We do not collect passwords (sign-in is passwordless), payment data or precise location.",
         ],
@@ -105,6 +110,7 @@ const en: Docs = {
           "kf:settings (local storage) – your theme and test options.",
           "kf:history (local storage) – results of tests you took while signed out; signed-in users have a local copy of their own results to keep the site fast.",
           "kf:pending (local storage) – results waiting to be uploaded to your account when you were offline.",
+          "kf:ticket (local storage) – a pre-fetched test ticket that lets your next test be verified for the leaderboard (signed-in users only).",
           "kf:consent (local storage) – remembers that you have seen the cookie notice.",
           "sb-…-auth-token (local storage) – keeps you signed in. It is set only when you sign in and removed when you sign out.",
         ],
@@ -203,7 +209,7 @@ const tr: Docs = {
           "E-posta adresi – tek kullanımlık bağlantıyla giriş yapmanız ve hesabınızın tanınması için.",
           "\"Google ile devam et\" seçeneğini kullanırsanız Google; e-posta adresinizi, adınızı, profil fotoğrafınızı ve hesap kimliğinizi bizimle paylaşır. Bunlardan yalnızca e-posta adresini ve hesap kimliğini giriş için kullanırız; Google şifrenizi hiçbir zaman almayız.",
           "Kullanıcı adı – seçtiğiniz herkese açık ad; liderlik tablosunda en iyi skorlarınızla birlikte gösterilir.",
-          "Test sonuçları – hız (WPM), doğruluk, tutarlılık, karakter sayıları, test modu ve dili ile her testin tarih ve saati.",
+          "Test sonuçları – hız (WPM), doğruluk, tutarlılık, karakter sayıları, test modu ve dili, her testin tarih ve saati ile zayıf tuşlarınızı göstermek için kullanılan tuş bazlı kısa bir özet (doğru, hatalı, ortalama süre).",
           "Test doğrulaması – oturum açıkken bir testi bitirdiğinizde, o testte bastığınız tuşlar ve zamanlamaları skoru yeniden hesaplamak ve bir betik tarafından üretilmediğini kontrol etmek için bir kez sunucumuza gönderilir. Yalnızca ortaya çıkan skor saklanır; tuş kaydı hemen silinir. Bu kayıt yalnızca test metnini kapsar, başka yazdıklarınızı değil.",
           "Şifre (giriş şifresizdir), ödeme bilgisi ya da hassas konum bilgisi toplamıyoruz.",
         ],
@@ -271,6 +277,7 @@ const tr: Docs = {
           "kf:settings (yerel depolama) – tema ve test seçenekleriniz.",
           "kf:history (yerel depolama) – giriş yapmadan yaptığınız testlerin sonuçları; giriş yapan kullanıcılarda sitenin hızlı çalışması için kendi sonuçlarının yerel bir kopyası.",
           "kf:pending (yerel depolama) – çevrimdışıyken hesabınıza yüklenmeyi bekleyen sonuçlar.",
+          "kf:ticket (yerel depolama) – bir sonraki testinizin liderlik tablosu için doğrulanabilmesini sağlayan, önceden alınmış test bileti (yalnızca oturum açıkken).",
           "kf:consent (yerel depolama) – çerez bildirimini gördüğünüzü hatırlar.",
           "sb-…-auth-token (yerel depolama) – oturumunuzu açık tutar. Yalnızca giriş yaptığınızda oluşturulur, çıkış yaptığınızda silinir.",
         ],
@@ -347,10 +354,10 @@ const tr: Docs = {
   },
 };
 
-const docs: Record<"en" | "tr", Docs> = { en, tr };
+const docs: Record<string, Docs> = { en, tr, de, es, fr, pt };
 
-/** Returns the document in the requested language, or English with `fallback: true`. */
+/** The document in the requested language (English if unknown). `translated` marks non-authoritative versions. */
 export function getLegalDoc(kind: LegalKind, locale: string) {
-  const lang = locale === "tr" ? "tr" : "en";
-  return { doc: docs[lang][kind], fallback: lang !== locale };
+  const lang = locale in docs ? locale : "en";
+  return { doc: docs[lang][kind], translated: lang !== "en" && lang !== "tr" };
 }

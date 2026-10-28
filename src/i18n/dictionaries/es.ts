@@ -181,7 +181,7 @@ const es: Dictionary = {
   },
   legal: {
     updated: "Última actualización: {date}",
-    englishOnly: "Esta página está disponible en inglés y turco.",
+    translationNote: "Esta es una traducción para tu comodidad. Si hay diferencias, prevalece la versión en inglés o en turco.",
   },
   skip: "Saltar al contenido",
   settings: {
