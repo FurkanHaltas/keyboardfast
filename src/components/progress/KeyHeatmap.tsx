@@ -18,8 +18,20 @@ const heat = (score: number) => Math.min(1, Math.max(0, (score - 0.8) / 1));
 /**
  * Keyboard-shaped heatmap of the user's weak letters in one typing language, plus a
  * shortcut into practice mode that drills exactly those keys.
+ * `lang` pins the language (results screen); `minTests` hides it until there's enough history.
  */
-export function KeyHeatmap({ history }: { history: readonly HistoryEntry[] }) {
+export function KeyHeatmap({
+  history,
+  lang: fixedLang,
+  minTests = 1,
+  onPractice,
+}: {
+  history: readonly HistoryEntry[];
+  lang?: WordLanguage;
+  minTests?: number;
+  /** replaces the default "go to the test page in practice mode" */
+  onPractice?: () => void;
+}) {
   const { t, locale } = useI18n();
   const router = useRouter();
   const setSettings = useSettings((s) => s.set);
@@ -30,14 +42,15 @@ export function KeyHeatmap({ history }: { history: readonly HistoryEntry[] }) {
   }, [history]);
   const latest = [...history].reverse().find((e) => e.keys && e.lang)?.lang as WordLanguage | undefined;
   const [picked, setPicked] = useState<WordLanguage | null>(null);
-  const lang = picked ?? latest;
+  const lang = fixedLang ?? picked ?? latest;
 
   const analysis = useMemo(() => (lang ? analyzeWeakness(history, lang) : null), [history, lang]);
-  if (!lang || !analysis) return null;
+  if (!lang || !analysis || analysis.tests < minTests) return null;
   const byKey = new Map(analysis.keys.map((k) => [k.key, k]));
   const hasData = analysis.keys.length >= 5;
 
   const practice = () => {
+    if (onPractice) return onPractice();
     setSettings({ mode: "practice", wordLang: lang });
     router.push(`/${locale}`);
   };
@@ -46,7 +59,7 @@ export function KeyHeatmap({ history }: { history: readonly HistoryEntry[] }) {
     <section className="rounded-2xl bg-raised p-5 sm:p-6">
       <div className="mb-1 flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-sm font-medium">{t.progress.heatmapTitle}</h2>
-        {langs.length > 1 && (
+        {!fixedLang && langs.length > 1 && (
           <div className="rounded-xl bg-bg text-sm">
             <Menu
               value={lang}

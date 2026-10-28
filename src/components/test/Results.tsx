@@ -1,13 +1,16 @@
 "use client";
 
 import { ArrowDown, ArrowRight, ArrowUp, ChartLine, Lightbulb, LogIn, RotateCcw, Trophy } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Kbd } from "@/components/Footer";
 import { LineChart } from "@/components/charts/LineChart";
+import { KeyHeatmap } from "@/components/progress/KeyHeatmap";
+import type { WordLanguage } from "@/content/words";
 import type { TestResult } from "@/engine/types";
 import { fmt } from "@/i18n/config";
 import { useI18n } from "@/i18n/I18nProvider";
-import type { Comparison } from "@/lib/history";
+import { getHistorySnapshot, subscribeHistory, type Comparison } from "@/lib/history";
+import { useSettings } from "@/lib/settings";
 import { useAuth } from "@/lib/sync";
 import { useUi } from "@/lib/ui";
 
@@ -16,13 +19,15 @@ interface Props {
   comparison: Comparison | null;
   saved: boolean;
   modeLabel: string;
+  /** typing language of the finished test; null for code */
+  lang: string | null;
   onNext: () => void;
   onRepeat: () => void;
 }
 
 const keyLabel = (k: string) => (k === " " ? "␣" : k);
 
-export function Results({ result, comparison, saved, modeLabel, onNext, onRepeat }: Props) {
+export function Results({ result, comparison, saved, modeLabel, lang, onNext, onRepeat }: Props) {
   const { t } = useI18n();
   const nextRef = useRef<HTMLButtonElement>(null);
   const r = result;
@@ -150,8 +155,26 @@ export function Results({ result, comparison, saved, modeLabel, onNext, onRepeat
           <Kbd>tab</Kbd>
         </span>
       </div>
+
+      {lang && <ResultsHeatmap lang={lang as WordLanguage} onNext={onNext} />}
     </section>
   );
+}
+
+/** Weak-key heatmap under the results, for members once a few tests in this language are in. */
+const HEATMAP_MIN_TESTS = 3;
+
+function ResultsHeatmap({ lang, onNext }: { lang: WordLanguage; onNext: () => void }) {
+  const user = useAuth((s) => s.user);
+  const history = useSyncExternalStore(subscribeHistory, getHistorySnapshot, () => null);
+  if (!user || !history) return null;
+  const practice = () => {
+    const s = useSettings.getState();
+    // Already practising this language: just start the next practice text.
+    if (s.mode === "practice" && s.wordLang === lang) onNext();
+    else s.set({ mode: "practice", wordLang: lang });
+  };
+  return <KeyHeatmap history={history} lang={lang} minTests={HEATMAP_MIN_TESTS} onPractice={practice} />;
 }
 
 function BigStat({ label, value, title }: { label: string; value: React.ReactNode; title?: string }) {

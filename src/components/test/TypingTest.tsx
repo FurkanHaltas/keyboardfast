@@ -214,6 +214,7 @@ export function TypingTest() {
           comparison={outcome.comparison}
           saved={outcome.saved}
           modeLabel={label}
+          lang={setup.lang}
           onNext={() => start()}
           onRepeat={() => start("repeat")}
         />
