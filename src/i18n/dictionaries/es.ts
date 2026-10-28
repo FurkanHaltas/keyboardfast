@@ -148,6 +148,8 @@ const es: Dictionary = {
     change: "cambiar nombre de usuario",
   },
   footer: {
+    about: "Acerca de",
+    guides: "Guías",
     privacy: "Privacidad",
     terms: "Términos",
     cookies: "Cookies",
@@ -178,6 +180,16 @@ const es: Dictionary = {
     title: "Algo salió mal",
     body: "Se produjo un error inesperado. Inténtalo de nuevo o recarga la página.",
     retry: "Intentar de nuevo",
+  },
+  guides: {
+    title: "Guías de mecanografía",
+    subtitle: "Guías prácticas y directas para escribir más rápido y con más precisión.",
+    readTime: "{n} min de lectura",
+    allGuides: "Todas las guías",
+    ctaTitle: "Ponlo en práctica",
+    ctaBody: "Haz una prueba ahora o deja que el modo práctica entrene tus teclas débiles.",
+    ctaButton: "Hacer una prueba",
+    englishOnly: "Esta página está disponible en inglés y turco.",
   },
   legal: {
     updated: "Última actualización: {date}",

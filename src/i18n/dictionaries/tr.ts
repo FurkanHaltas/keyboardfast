@@ -148,6 +148,8 @@ const tr: Dictionary = {
     change: "kullanıcı adını değiştir",
   },
   footer: {
+    about: "Hakkında",
+    guides: "Rehberler",
     privacy: "Gizlilik",
     terms: "Koşullar",
     cookies: "Çerezler",
@@ -178,6 +180,16 @@ const tr: Dictionary = {
     title: "Bir şeyler ters gitti",
     body: "Beklenmedik bir hata oluştu. Tekrar dene ya da sayfayı yenile.",
     retry: "Tekrar dene",
+  },
+  guides: {
+    title: "Yazma rehberleri",
+    subtitle: "Daha hızlı ve doğru yazmak için pratik, lafı dolandırmayan rehberler.",
+    readTime: "{n} dk okuma",
+    allGuides: "Tüm rehberler",
+    ctaTitle: "Hemen uygula",
+    ctaBody: "Şimdi bir test yap ya da alıştırma moduyla zayıf tuşlarına çalış.",
+    ctaButton: "Teste başla",
+    englishOnly: "Bu sayfa İngilizce ve Türkçe olarak mevcuttur.",
   },
   legal: {
     updated: "Son güncelleme: {date}",

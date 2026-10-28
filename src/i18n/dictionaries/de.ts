@@ -148,6 +148,8 @@ const de: Dictionary = {
     change: "Benutzernamen ändern",
   },
   footer: {
+    about: "Über uns",
+    guides: "Ratgeber",
     privacy: "Datenschutz",
     terms: "Nutzungsbedingungen",
     cookies: "Cookies",
@@ -178,6 +180,16 @@ const de: Dictionary = {
     title: "Etwas ist schiefgelaufen",
     body: "Ein unerwarteter Fehler ist aufgetreten. Versuche es erneut oder lade die Seite neu.",
     retry: "Erneut versuchen",
+  },
+  guides: {
+    title: "Tipp-Ratgeber",
+    subtitle: "Praktische Ratgeber, um schneller und genauer zu tippen.",
+    readTime: "{n} Min. Lesezeit",
+    allGuides: "Alle Ratgeber",
+    ctaTitle: "Gleich ausprobieren",
+    ctaBody: "Mach jetzt einen Test oder übe deine schwachen Tasten im Übungsmodus.",
+    ctaButton: "Test starten",
+    englishOnly: "Diese Seite ist auf Englisch und Türkisch verfügbar.",
   },
   legal: {
     updated: "Zuletzt aktualisiert: {date}",

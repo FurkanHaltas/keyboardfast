@@ -146,6 +146,8 @@ const en = {
     change: "change username",
   },
   footer: {
+    about: "About",
+    guides: "Guides",
     privacy: "Privacy",
     terms: "Terms",
     cookies: "Cookies",
@@ -176,6 +178,16 @@ const en = {
     title: "Something went wrong",
     body: "An unexpected error occurred. Try again, or reload the page.",
     retry: "Try again",
+  },
+  guides: {
+    title: "Typing guides",
+    subtitle: "Practical, no-nonsense guides to typing faster and more accurately.",
+    readTime: "{n} min read",
+    allGuides: "All guides",
+    ctaTitle: "Put it into practice",
+    ctaBody: "Take a test now, or let practice mode drill your weak keys.",
+    ctaButton: "Take a test",
+    englishOnly: "This page is available in English and Turkish.",
   },
   legal: {
     updated: "Last updated: {date}",

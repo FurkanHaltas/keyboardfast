@@ -7,6 +7,8 @@ import { ContactEmail } from "./ContactEmail";
 export function Footer() {
   const { t, locale } = useI18n();
   const links = [
+    { href: `/${locale}/guides`, label: t.footer.guides },
+    { href: `/${locale}/about`, label: t.footer.about },
     { href: `/${locale}/privacy`, label: t.footer.privacy },
     { href: `/${locale}/cookies`, label: t.footer.cookies },
     { href: `/${locale}/terms`, label: t.footer.terms },

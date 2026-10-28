@@ -148,6 +148,8 @@ const fr: Dictionary = {
     change: "changer de nom d'utilisateur",
   },
   footer: {
+    about: "À propos",
+    guides: "Guides",
     privacy: "Confidentialité",
     terms: "Conditions",
     cookies: "Cookies",
@@ -178,6 +180,16 @@ const fr: Dictionary = {
     title: "Une erreur s'est produite",
     body: "Une erreur inattendue est survenue. Réessayez ou rechargez la page.",
     retry: "Réessayer",
+  },
+  guides: {
+    title: "Guides de frappe",
+    subtitle: "Des guides pratiques et concrets pour taper plus vite et plus juste.",
+    readTime: "{n} min de lecture",
+    allGuides: "Tous les guides",
+    ctaTitle: "Passez à la pratique",
+    ctaBody: "Faites un test maintenant ou laissez le mode entraînement travailler vos touches faibles.",
+    ctaButton: "Faire un test",
+    englishOnly: "Cette page est disponible en anglais et en turc.",
   },
   legal: {
     updated: "Dernière mise à jour : {date}",
