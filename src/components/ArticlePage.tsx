@@ -1,32 +1,25 @@
-import { ArrowLeft, ArrowRight, Clock, Languages } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
-import { CONTENT_LOCALES, type Article, type Block } from "@/content/guides";
+import type { Article, Block } from "@/content/guides";
 import { fmt, getDictionary, type Locale } from "@/i18n/config";
 
 /** About page and guides: long-form text with a call to action back to the test. */
 export async function ArticlePage({ article, locale, guide }: { article: Article; locale: Locale; guide?: boolean }) {
   const t = await getDictionary(locale);
-  const own = (CONTENT_LOCALES as readonly string[]).includes(locale);
 
   return (
-    <article className="fade-up mx-auto w-full max-w-2xl pb-16" lang={own ? locale : "en"}>
-      {!own && (
-        <p className="mb-6 flex items-center gap-2 rounded-xl bg-raised px-4 py-3 text-sm text-sub" lang={locale}>
-          <Languages size={16} className="shrink-0 text-main" /> {t.guides.englishOnly}
-        </p>
-      )}
+    <article className="fade-up mx-auto w-full max-w-2xl pb-16">
       {guide && (
         <Link
           href={`/${locale}/guides`}
           className="mb-6 inline-flex items-center gap-1.5 text-sm text-sub transition-colors hover:text-text"
-          lang={locale}
         >
           <ArrowLeft size={15} /> {t.guides.allGuides}
         </Link>
       )}
       <h1 className="text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">{article.title}</h1>
       {guide && (
-        <p className="mt-3 flex items-center gap-1.5 text-sm text-sub" lang={locale}>
+        <p className="mt-3 flex items-center gap-1.5 text-sm text-sub">
           <Clock size={14} /> {fmt(t.guides.readTime, { n: article.minutes })}
         </p>
       )}
@@ -43,7 +36,7 @@ export async function ArticlePage({ article, locale, guide }: { article: Article
         </section>
       ))}
 
-      <aside className="mt-12 rounded-2xl bg-raised p-6" lang={locale}>
+      <aside className="mt-12 rounded-2xl bg-raised p-6">
         <h2 className="font-semibold">{t.guides.ctaTitle}</h2>
         <p className="mt-1 text-sm text-sub">{t.guides.ctaBody}</p>
         <Link

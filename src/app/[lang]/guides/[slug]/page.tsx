@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticlePage } from "@/components/ArticlePage";
-import { CONTENT_LOCALES, getGuide, GUIDE_SLUGS } from "@/content/guides";
+import { getGuide, GUIDE_SLUGS } from "@/content/guides";
 import { isLocale } from "@/i18n/config";
 import { pageMetadata } from "@/lib/pageMetadata";
 import { OWNER_NAME, SITE_URL } from "@/lib/site";
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/guides/[sl
   const { lang, slug } = await params;
   const g = isLocale(lang) ? getGuide(lang, slug) : undefined;
   if (!g) return {};
-  return pageMetadata(lang, `/guides/${slug}`, { title: g.title, description: g.description, locales: CONTENT_LOCALES });
+  return pageMetadata(lang, `/guides/${slug}`, { title: g.title, description: g.description });
 }
 
 export default async function Page({ params }: PageProps<"/[lang]/guides/[slug]">) {
@@ -27,7 +27,7 @@ export default async function Page({ params }: PageProps<"/[lang]/guides/[slug]"
     "@type": "Article",
     headline: g.title,
     description: g.description,
-    inLanguage: lang === "tr" ? "tr" : "en",
+    inLanguage: lang,
     author: { "@type": "Person", name: OWNER_NAME },
     publisher: { "@type": "Organization", name: "keyboardfast", url: SITE_URL },
     mainEntityOfPage: `${SITE_URL}/${lang}/guides/${slug}`,

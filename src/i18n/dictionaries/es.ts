@@ -189,7 +189,6 @@ const es: Dictionary = {
     ctaTitle: "Ponlo en práctica",
     ctaBody: "Haz una prueba ahora o deja que el modo práctica entrene tus teclas débiles.",
     ctaButton: "Hacer una prueba",
-    englishOnly: "Esta página está disponible en inglés y turco.",
   },
   legal: {
     updated: "Última actualización: {date}",

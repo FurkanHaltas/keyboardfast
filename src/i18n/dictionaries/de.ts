@@ -189,7 +189,6 @@ const de: Dictionary = {
     ctaTitle: "Gleich ausprobieren",
     ctaBody: "Mach jetzt einen Test oder übe deine schwachen Tasten im Übungsmodus.",
     ctaButton: "Test starten",
-    englishOnly: "Diese Seite ist auf Englisch und Türkisch verfügbar.",
   },
   legal: {
     updated: "Zuletzt aktualisiert: {date}",

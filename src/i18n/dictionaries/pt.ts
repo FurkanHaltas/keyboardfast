@@ -189,7 +189,6 @@ const pt: Dictionary = {
     ctaTitle: "Coloque em prática",
     ctaBody: "Faça um teste agora ou deixe o modo prática treinar suas teclas fracas.",
     ctaButton: "Fazer um teste",
-    englishOnly: "Esta página está disponível em inglês e turco.",
   },
   legal: {
     updated: "Última atualização: {date}",

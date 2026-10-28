@@ -1,8 +1,12 @@
 /**
- * Long-form pages: the about page and typing guides. Written in English and Turkish;
- * other interface languages show the English text (with a notice) and point their
- * canonical URL at it. A body item is a paragraph, or `{ list }` for a bullet list.
+ * Long-form pages: the about page and typing guides, in all six interface languages
+ * (English and Turkish here, the others in guides-*.ts). Slugs are shared across languages.
+ * A body item is a paragraph, or `{ list }` for a bullet list.
  */
+import { de } from "./guides-de";
+import { es } from "./guides-es";
+import { fr } from "./guides-fr";
+import { pt } from "./guides-pt";
 
 export type Block = string | { list: string[] };
 
@@ -13,6 +17,11 @@ export interface Article {
   description: string;
   minutes: number;
   sections: { heading: string; body: Block[] }[];
+}
+
+export interface ArticleSet {
+  about: Article;
+  guides: Article[];
 }
 
 type ContentLang = "en" | "tr";
@@ -523,12 +532,17 @@ const guides: Record<ContentLang, Article[]> = {
   ],
 };
 
-const lang = (locale: string): ContentLang => (locale === "tr" ? "tr" : "en");
+const sets: Record<string, ArticleSet> = {
+  en: { about: about.en, guides: guides.en },
+  tr: { about: about.tr, guides: guides.tr },
+  de,
+  es,
+  fr,
+  pt,
+};
+const set = (locale: string) => sets[locale] ?? sets.en;
 
-/** Locales with their own text; the rest show English and canonicalise to it. */
-export const CONTENT_LOCALES = ["en", "tr"] as const;
-
-export const getAbout = (locale: string) => about[lang(locale)];
-export const getGuides = (locale: string) => guides[lang(locale)];
-export const getGuide = (locale: string, slug: string) => guides[lang(locale)].find((g) => g.slug === slug);
+export const getAbout = (locale: string) => set(locale).about;
+export const getGuides = (locale: string) => set(locale).guides;
+export const getGuide = (locale: string, slug: string) => set(locale).guides.find((g) => g.slug === slug);
 export const GUIDE_SLUGS = guides.en.map((g) => g.slug);

@@ -187,7 +187,6 @@ const en = {
     ctaTitle: "Put it into practice",
     ctaBody: "Take a test now, or let practice mode drill your weak keys.",
     ctaButton: "Take a test",
-    englishOnly: "This page is available in English and Turkish.",
   },
   legal: {
     updated: "Last updated: {date}",

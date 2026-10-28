@@ -189,7 +189,6 @@ const tr: Dictionary = {
     ctaTitle: "Hemen uygula",
     ctaBody: "Şimdi bir test yap ya da alıştırma moduyla zayıf tuşlarına çalış.",
     ctaButton: "Teste başla",
-    englishOnly: "Bu sayfa İngilizce ve Türkçe olarak mevcuttur.",
   },
   legal: {
     updated: "Son güncelleme: {date}",

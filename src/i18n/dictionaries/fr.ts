@@ -189,7 +189,6 @@ const fr: Dictionary = {
     ctaTitle: "Passez à la pratique",
     ctaBody: "Faites un test maintenant ou laissez le mode entraînement travailler vos touches faibles.",
     ctaButton: "Faire un test",
-    englishOnly: "Cette page est disponible en anglais et en turc.",
   },
   legal: {
     updated: "Dernière mise à jour : {date}",
