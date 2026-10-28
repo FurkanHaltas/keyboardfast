@@ -26,6 +26,13 @@ const pt: Dictionary = {
     autoIndent: "A indentação é digitada para você – pressione Enter no fim da linha",
   },
   results: {
+    share: "Compartilhar",
+    shareText: "Digitei {wpm} WPM com {acc}% de precisão no keyboardfast ({mode}). Consegue me superar?",
+    shareDownload: "Baixar imagem",
+    shareCopy: "Copiar texto",
+    shareCopied: "Copiado!",
+    sharePostX: "Postar no X",
+    cardAccuracy: "precisão",
     wpm: "ppm",
     acc: "precisão",
     raw: "bruto",

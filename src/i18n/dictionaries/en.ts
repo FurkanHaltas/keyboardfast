@@ -24,6 +24,13 @@ const en = {
     autoIndent: "Indentation is typed for you – press Enter at line ends",
   },
   results: {
+    share: "Share",
+    shareText: "I typed {wpm} WPM with {acc}% accuracy on keyboardfast ({mode}). Can you beat it?",
+    shareDownload: "Download image",
+    shareCopy: "Copy text",
+    shareCopied: "Copied!",
+    sharePostX: "Post on X",
+    cardAccuracy: "accuracy",
     wpm: "wpm",
     acc: "acc",
     raw: "raw",

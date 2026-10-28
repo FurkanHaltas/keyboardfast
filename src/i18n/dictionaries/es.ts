@@ -26,6 +26,13 @@ const es: Dictionary = {
     autoIndent: "La sangría se escribe sola – pulsa Enter al final de cada línea",
   },
   results: {
+    share: "Compartir",
+    shareText: "He escrito a {wpm} WPM con un {acc} % de precisión en keyboardfast ({mode}). ¿Puedes superarlo?",
+    shareDownload: "Descargar imagen",
+    shareCopy: "Copiar texto",
+    shareCopied: "¡Copiado!",
+    sharePostX: "Publicar en X",
+    cardAccuracy: "precisión",
     wpm: "ppm",
     acc: "precisión",
     raw: "bruto",

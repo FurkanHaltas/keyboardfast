@@ -26,6 +26,13 @@ const tr: Dictionary = {
     autoIndent: "Girintiler otomatik yazılır – satır sonunda Enter'a bas",
   },
   results: {
+    share: "Paylaş",
+    shareText: "keyboardfast'te %{acc} doğrulukla {wpm} WPM yazdım ({mode}). Geçebilir misin?",
+    shareDownload: "Görseli indir",
+    shareCopy: "Metni kopyala",
+    shareCopied: "Kopyalandı!",
+    sharePostX: "X'te paylaş",
+    cardAccuracy: "doğruluk",
     wpm: "wpm",
     acc: "doğruluk",
     raw: "ham",

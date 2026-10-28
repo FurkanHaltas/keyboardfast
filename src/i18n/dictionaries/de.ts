@@ -26,6 +26,13 @@ const de: Dictionary = {
     autoIndent: "Einrückungen werden automatisch getippt – Enter am Zeilenende",
   },
   results: {
+    share: "Teilen",
+    shareText: "Ich habe auf keyboardfast {wpm} WPM mit {acc} % Genauigkeit getippt ({mode}). Schaffst du mehr?",
+    shareDownload: "Bild herunterladen",
+    shareCopy: "Text kopieren",
+    shareCopied: "Kopiert!",
+    sharePostX: "Auf X posten",
+    cardAccuracy: "Genauigkeit",
     wpm: "wpm",
     acc: "genau",
     raw: "roh",

@@ -26,6 +26,13 @@ const fr: Dictionary = {
     autoIndent: "L'indentation est tapée pour vous – Entrée en fin de ligne",
   },
   results: {
+    share: "Partager",
+    shareText: "J'ai tapé à {wpm} MPM avec {acc} % de précision sur keyboardfast ({mode}). Tu peux faire mieux ?",
+    shareDownload: "Télécharger l'image",
+    shareCopy: "Copier le texte",
+    shareCopied: "Copié !",
+    sharePostX: "Publier sur X",
+    cardAccuracy: "précision",
     wpm: "mpm",
     acc: "précision",
     raw: "brut",

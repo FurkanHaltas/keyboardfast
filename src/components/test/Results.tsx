@@ -11,6 +11,7 @@ import { fmt } from "@/i18n/config";
 import { useI18n } from "@/i18n/I18nProvider";
 import { getHistorySnapshot, subscribeHistory, type Comparison } from "@/lib/history";
 import { useSettings } from "@/lib/settings";
+import { ShareButton } from "./ShareButton";
 import { useAuth } from "@/lib/sync";
 import { useUi } from "@/lib/ui";
 
@@ -151,6 +152,7 @@ export function Results({ result, comparison, saved, modeLabel, lang, onNext, on
         >
           <RotateCcw size={16} /> {t.results.repeat}
         </button>
+        <ShareButton card={{ wpm: r.wpm, acc: r.accuracy, mode: modeLabel, series: r.samples.map((x) => x.wpm) }} />
         <span className="ml-1 hidden items-center gap-2 text-xs text-sub sm:flex">
           <Kbd>tab</Kbd>
         </span>
