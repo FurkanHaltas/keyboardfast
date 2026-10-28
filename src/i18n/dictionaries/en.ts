@@ -116,7 +116,7 @@ const en = {
     empty: "No results in this category yet. Be the first!",
     you: "you",
     error: "Couldn't load the leaderboard. Please try again.",
-    plainOnly: "Only tests without punctuation and numbers, with at least 75% accuracy, are ranked.",
+    plainOnly: "Only server-verified tests without punctuation and numbers, with at least 75% accuracy, are ranked.",
     signInToJoin: "Sign in to appear on the leaderboard.",
     pickUsername: "Choose a username to appear on the leaderboard.",
     chooseUsername: "Choose username",

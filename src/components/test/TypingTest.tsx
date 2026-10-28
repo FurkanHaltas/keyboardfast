@@ -9,7 +9,8 @@ import { createTest, repeatTest, type TestSetup } from "@/lib/createTest";
 import { compare, getHistorySnapshot, isSavable, type Comparison, type HistoryEntry } from "@/lib/history";
 import { modeLabel } from "@/lib/modeLabel";
 import { useSettings, useSettingsReady } from "@/lib/settings";
-import { saveResult } from "@/lib/sync";
+import { saveResult, submitForVerification, useAuth } from "@/lib/sync";
+import { onTicket, takeTicket } from "@/lib/tickets";
 import { useUi } from "@/lib/ui";
 import { ConfigBar } from "./ConfigBar";
 import { Results } from "./Results";
@@ -40,6 +41,8 @@ export function TypingTest() {
   const inputRef = useRef<HTMLInputElement>(null);
   const setupRef = useRef<TestSetup | null>(null);
   const savedFor = useRef<unknown>(null);
+  /** set when a script (not a person) generated input during the current test */
+  const untrusted = useRef(false);
 
   const engine = setup?.engine;
   const version = useSyncExternalStore(engine?.subscribe ?? noopSubscribe, engine?.getVersion ?? zero, zero);
@@ -53,10 +56,18 @@ export function TypingTest() {
     (kind: "new" | "repeat" = "new") => {
       const s = useSettings.getState();
       const prev = setupRef.current;
-      const next = kind === "repeat" && prev ? repeatTest(prev) : createTest(s, locale, prev ?? undefined);
+      let next: TestSetup;
+      if (kind === "repeat" && prev) next = repeatTest(prev);
+      else {
+        // Signed-in users get a server-issued seed so the result can be verified for the leaderboard.
+        const ticket = useAuth.getState().user ? takeTicket() : null;
+        next = createTest(s, locale, prev ?? undefined, ticket?.seed);
+        if (ticket) next.ticket = ticket.ticket;
+      }
       setupRef.current = next;
       setSetup(next);
       setOutcome(null);
+      untrusted.current = false;
       setTestId((n) => n + 1);
       focusInput();
     },
@@ -67,6 +78,17 @@ export function TypingTest() {
   useEffect(() => {
     if (ready) start();
   }, [ready, cfg, start]);
+
+  // A ticket arrived (first visit, or the previous one was used): if the user hasn't started
+  // typing yet, rebuild the test from it so this one counts for the leaderboard too.
+  useEffect(
+    () =>
+      onTicket(() => {
+        const cur = setupRef.current;
+        if (cur && !cur.ticket && cur.engine.status === "idle" && useAuth.getState().user) start();
+      }),
+    [start],
+  );
 
   // Drive the clock and per-second samples while running.
   useEffect(() => {
@@ -113,6 +135,7 @@ export function TypingTest() {
     if (saved) {
       comparison = compare(getHistorySnapshot(), entry);
       saveResult(entry);
+      if (!untrusted.current) void submitForVerification(entry, setup);
     }
     setOutcome({ result: r, comparison, saved });
   }, [engine, setup, status, version]);
@@ -148,6 +171,7 @@ export function TypingTest() {
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!e.nativeEvent.isTrusted) untrusted.current = true;
     setCaps(e.getModifierState?.("CapsLock") ?? false);
     if (!engine) return;
     if (e.key === "Backspace") {
@@ -161,6 +185,7 @@ export function TypingTest() {
 
   const onInput = (e: React.FormEvent<HTMLInputElement>) => {
     const ev = e.nativeEvent as InputEvent;
+    if (!ev.isTrusted) untrusted.current = true;
     if (ev.isComposing) return;
     if (ev.inputType === "deleteContentBackward") {
       // Mobile keyboards often skip keydown for Backspace.

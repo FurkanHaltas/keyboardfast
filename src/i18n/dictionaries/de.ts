@@ -118,7 +118,7 @@ const de: Dictionary = {
     empty: "Noch keine Ergebnisse in dieser Kategorie. Sei der Erste!",
     you: "du",
     error: "Rangliste konnte nicht geladen werden. Bitte versuche es erneut.",
-    plainOnly: "Gewertet werden nur Tests ohne Satzzeichen und Zahlen mit mindestens 75 % Genauigkeit.",
+    plainOnly: "Gewertet werden nur serverseitig geprüfte Tests ohne Satzzeichen und Zahlen mit mindestens 75 % Genauigkeit.",
     signInToJoin: "Melde dich an, um in der Rangliste zu erscheinen.",
     pickUsername: "Wähle einen Benutzernamen, um in der Rangliste zu erscheinen.",
     chooseUsername: "Benutzernamen wählen",

@@ -118,7 +118,7 @@ const fr: Dictionary = {
     empty: "Aucun résultat dans cette catégorie pour l'instant. Soyez le premier !",
     you: "vous",
     error: "Impossible de charger le classement. Veuillez réessayer.",
-    plainOnly: "Seuls les tests sans ponctuation ni nombres, avec au moins 75 % de précision, sont classés.",
+    plainOnly: "Seuls les tests vérifiés par le serveur, sans ponctuation ni chiffres et avec au moins 75 % de précision, sont classés.",
     signInToJoin: "Connectez-vous pour apparaître dans le classement.",
     pickUsername: "Choisissez un nom d'utilisateur pour apparaître dans le classement.",
     chooseUsername: "Choisir un nom d'utilisateur",

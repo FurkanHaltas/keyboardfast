@@ -118,7 +118,7 @@ const tr: Dictionary = {
     empty: "Bu kategoride henüz sonuç yok. İlk sen ol!",
     you: "sen",
     error: "Liderlik tablosu yüklenemedi. Lütfen tekrar dene.",
-    plainOnly: "Sadece noktalama ve sayı içermeyen, en az %75 doğruluklu testler sıralamaya girer.",
+    plainOnly: "Yalnızca sunucuda doğrulanmış, noktalama ve sayı içermeyen, en az %75 doğruluklu testler sıralanır.",
     signInToJoin: "Liderlik tablosunda yer almak için giriş yap.",
     pickUsername: "Liderlik tablosunda görünmek için bir kullanıcı adı seç.",
     chooseUsername: "Kullanıcı adı seç",

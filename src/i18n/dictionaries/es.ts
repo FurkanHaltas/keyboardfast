@@ -118,7 +118,7 @@ const es: Dictionary = {
     empty: "Aún no hay resultados en esta categoría. ¡Sé el primero!",
     you: "tú",
     error: "No se pudo cargar la clasificación. Inténtalo de nuevo.",
-    plainOnly: "Solo cuentan los tests sin puntuación ni números y con al menos un 75 % de precisión.",
+    plainOnly: "Solo se clasifican las pruebas verificadas por el servidor, sin puntuación ni números y con al menos un 75 % de precisión.",
     signInToJoin: "Inicia sesión para aparecer en la clasificación.",
     pickUsername: "Elige un nombre de usuario para aparecer en la clasificación.",
     chooseUsername: "Elegir nombre de usuario",

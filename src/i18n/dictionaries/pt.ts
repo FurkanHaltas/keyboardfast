@@ -118,7 +118,7 @@ const pt: Dictionary = {
     empty: "Ainda não há resultados nesta categoria. Seja o primeiro!",
     you: "você",
     error: "Não foi possível carregar o ranking. Tente novamente.",
-    plainOnly: "Só entram no ranking testes sem pontuação e números, com pelo menos 75% de precisão.",
+    plainOnly: "Só entram no ranking testes verificados pelo servidor, sem pontuação nem números e com pelo menos 75% de precisão.",
     signInToJoin: "Entre para aparecer no ranking.",
     pickUsername: "Escolha um nome de usuário para aparecer no ranking.",
     chooseUsername: "Escolher nome de usuário",

@@ -223,8 +223,15 @@ export const CODE_LANGUAGE_NAMES: Record<CodeLanguage, string> = {
 };
 
 /** Picks a random snippet, avoiding an immediate repeat of `previous`. */
-export function pickSnippet(lang: CodeLanguage, previous?: string): string {
-  const list: readonly string[] = snippets[lang];
-  const options = list.length > 1 ? list.filter((s) => s !== previous) : list;
-  return options[Math.floor(Math.random() * options.length)];
+/** Index of a random snippet for `lang`, avoiding the previous one when possible. */
+export function pickSnippet(lang: CodeLanguage, previous?: number): number {
+  const count = snippets[lang].length;
+  if (count < 2 || previous === undefined) return Math.floor(Math.random() * count);
+  return (previous + 1 + Math.floor(Math.random() * (count - 1))) % count;
+}
+
+/** The snippet at `index`, or undefined for an unknown language or index (server-side validation). */
+export function snippetAt(lang: string, index: number): string | undefined {
+  const list: readonly string[] | undefined = (snippets as Record<string, readonly string[]>)[lang];
+  return Number.isInteger(index) ? list?.[index] : undefined;
 }

@@ -3,7 +3,9 @@
 import type { User } from "@supabase/supabase-js";
 import { create } from "zustand";
 import { addLocal, getHistoryScope, readHistory, setHistoryScope, writeHistory, type HistoryEntry } from "./history";
+import type { TestSetup } from "./createTest";
 import { supabase } from "./supabase";
+import { clearTicket, refillTicket } from "./tickets";
 
 interface AuthState {
   user: { id: string; email: string | null } | null;
@@ -123,6 +125,32 @@ async function syncAccount(uid: string) {
 }
 
 /** Saves a finished test locally and, when signed in, to the account. */
+/**
+ * Asks our server to verify a finished test (replaying its keystrokes) so it can appear on
+ * the leaderboard. Fire-and-forget: the normal save above already keeps the result.
+ */
+export async function submitForVerification(entry: HistoryEntry, setup: TestSetup) {
+  if (!setup.ticket || !useAuth.getState().user) return;
+  const { data } = await supabase().auth.getSession();
+  const token = data.session?.access_token;
+  if (!token) return;
+  const { mode, mode2, lang, punctuation, numbers, snippet } = setup;
+  try {
+    await fetch("/api/results", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        id: entry.id,
+        ticket: setup.ticket,
+        config: { mode, mode2, lang, punctuation, numbers, snippet },
+        events: setup.engine.events,
+      }),
+    });
+  } catch {
+    // Not verified this time; the result itself is already saved.
+  }
+}
+
 export function saveResult(entry: HistoryEntry) {
   addLocal(entry);
   const uid = useAuth.getState().user?.id;
@@ -171,6 +199,9 @@ export function startAuth() {
     if (user?.id !== prev) useAuth.setState({ profile: undefined });
     useAuth.setState({ user: user ? { id: user.id, email: user.email ?? null } : null, ready: true });
     setHistoryScope(user?.id ?? null);
+    // Verifiable tests need a server ticket; guests can't use them, so drop any left over.
+    if (user) void refillTicket();
+    else clearTicket();
     if (user && user.id !== prev) {
       void syncAccount(user.id);
       void loadProfile(user.id);

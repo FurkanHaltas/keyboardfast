@@ -1,4 +1,4 @@
-﻿import { buildResult, countWpmChars } from "./stats";
+import { buildResult, countWpmChars } from "./stats";
 import type { Keystroke, SecondSample, TestResult, Word } from "./types";
 
 export type TestLimit =
@@ -30,6 +30,11 @@ export class TypingEngine {
   startedAt = 0;
   finishedAt = 0;
   strokes: Keystroke[] = [];
+  /**
+   * Raw input log – [ms since start, key] with "\b" for backspace and "\b\b" for a
+   * whole-word backspace – so the server can replay the test and verify the result.
+   */
+  events: [number, string][] = [];
   samples: SecondSample[] = [];
   result: TestResult | null = null;
   /** increments on every state change; drives useSyncExternalStore */
@@ -74,6 +79,7 @@ export class TypingEngine {
     }
     this.lastNow = now;
     if (this.checkTime(now)) return;
+    this.record(now, ch);
 
     if (ch === " " || ch === "\n") this.separate(ch, now);
     else this.append(ch, now);
@@ -86,6 +92,10 @@ export class TypingEngine {
    * at that moment even if ticks arrive late (e.g. a throttled background tab).
    */
   private netLog: { t: number; net: number }[] = [];
+
+  private record(now: number, key: string) {
+    this.events.push([Math.round(now - this.startedAt), key]);
+  }
 
   private logNet(now: number) {
     if (this.status === "idle") return;
@@ -130,6 +140,7 @@ export class TypingEngine {
     if (this.status !== "running") return;
     this.lastNow = now;
     if (this.checkTime(now)) return;
+    this.record(now, wholeWord ? "\b\b" : "\b");
     const cur = this.typed[this.index];
     if (cur.length > 0) {
       this.typed[this.index] = wholeWord ? "" : cur.slice(0, -1);
@@ -206,4 +217,18 @@ export class TypingEngine {
       durationMs: elapsed,
     });
   }
+}
+
+/**
+ * Re-runs a recorded event log on a fresh engine. Returns the finished engine, or null
+ * if the log doesn't complete the test. Timed tests end exactly at their limit.
+ */
+export function replay(engine: TypingEngine, events: readonly [number, string][], seconds?: number) {
+  for (const [t, key] of events) {
+    if (key === "\b") engine.backspace(false, t);
+    else if (key === "\b\b") engine.backspace(true, t);
+    else engine.input(key, t);
+  }
+  if (seconds !== undefined) engine.tick(seconds * 1000);
+  return engine.status === "finished" && engine.result ? engine : null;
 }

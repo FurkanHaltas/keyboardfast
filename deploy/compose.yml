@@ -4,6 +4,10 @@ services:
   keyboardfast:
     image: ghcr.io/furkanhaltas/keyboardfast:latest
     restart: unless-stopped
+    # Server secrets (SUPABASE_SECRET_KEY, TICKET_SECRET) live only on the VPS, never in the repo.
+    env_file:
+      - path: .env
+        required: false
     expose:
       - "3000"
 

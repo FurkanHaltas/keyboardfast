@@ -38,7 +38,8 @@ const en: Docs = {
           "If you choose \"Continue with Google\", Google shares your email address, name, profile picture and account ID with us. We use only the email address and account ID to sign you in; we never receive your Google password.",
           "Username – the public name you choose; it is shown on the leaderboard together with your best scores.",
           "Test results – speed (WPM), accuracy, consistency, character counts, test mode and language, and the date and time of each test.",
-          "We do not collect your keystroke text, passwords (sign-in is passwordless), payment data or precise location.",
+          "Test verification – when you finish a test while signed in, the keys you pressed in that test and their timing are sent to our server once, so it can recalculate the score and check that it wasn't produced by a script. Only the resulting score is stored; the keystroke log is discarded immediately. It covers the test text only, nothing else you type.",
+          "We do not collect passwords (sign-in is passwordless), payment data or precise location.",
         ],
       },
       {
@@ -203,7 +204,8 @@ const tr: Docs = {
           "\"Google ile devam et\" seçeneğini kullanırsanız Google; e-posta adresinizi, adınızı, profil fotoğrafınızı ve hesap kimliğinizi bizimle paylaşır. Bunlardan yalnızca e-posta adresini ve hesap kimliğini giriş için kullanırız; Google şifrenizi hiçbir zaman almayız.",
           "Kullanıcı adı – seçtiğiniz herkese açık ad; liderlik tablosunda en iyi skorlarınızla birlikte gösterilir.",
           "Test sonuçları – hız (WPM), doğruluk, tutarlılık, karakter sayıları, test modu ve dili ile her testin tarih ve saati.",
-          "Yazdığınız metni, şifre (giriş şifresizdir), ödeme bilgisi ya da hassas konum bilgisi toplamıyoruz.",
+          "Test doğrulaması – oturum açıkken bir testi bitirdiğinizde, o testte bastığınız tuşlar ve zamanlamaları skoru yeniden hesaplamak ve bir betik tarafından üretilmediğini kontrol etmek için bir kez sunucumuza gönderilir. Yalnızca ortaya çıkan skor saklanır; tuş kaydı hemen silinir. Bu kayıt yalnızca test metnini kapsar, başka yazdıklarınızı değil.",
+          "Şifre (giriş şifresizdir), ödeme bilgisi ya da hassas konum bilgisi toplamıyoruz.",
         ],
       },
       {
