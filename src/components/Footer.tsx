@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useI18n } from "@/i18n/I18nProvider";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { ContactEmail } from "./ContactEmail";
 
 export function Footer() {
   const { t, locale } = useI18n();
@@ -22,9 +22,7 @@ export function Footer() {
             {l.label}
           </Link>
         ))}
-        <a href={`mailto:${CONTACT_EMAIL}`} className="transition-colors hover:text-text">
-          {t.footer.contact}
-        </a>
+        <ContactEmail className="transition-colors hover:text-text">{t.footer.contact}</ContactEmail>
         <span>
           © 2026{" "}
           <span translate="no" className="notranslate">

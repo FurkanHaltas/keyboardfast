@@ -1,11 +1,12 @@
 import { Languages } from "lucide-react";
 import { getLegalDoc, type LegalKind } from "@/content/legal";
 import { fmt, getDictionary, type Locale } from "@/i18n/config";
-import { CONTACT_EMAIL, LEGAL_UPDATED, OWNER_NAME } from "@/lib/site";
+import { LEGAL_UPDATED, OWNER_NAME } from "@/lib/site";
+import { ContactEmail } from "./ContactEmail";
 
 const SITE = "keyboardfast.com";
 
-/** Fills {owner}/{site} and turns {email} into a mailto link. */
+/** Fills {owner}/{site} and turns {email} into a (harvester-proof) mailto link. */
 function Text({ value }: { value: string }) {
   const parts = value.replaceAll("{owner}", OWNER_NAME).replaceAll("{site}", SITE).split("{email}");
   return (
@@ -14,9 +15,7 @@ function Text({ value }: { value: string }) {
         <span key={i}>
           {part}
           {i < parts.length - 1 && (
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-main underline-offset-2 hover:underline">
-              {CONTACT_EMAIL}
-            </a>
+            <ContactEmail className="text-main underline-offset-2 hover:underline" />
           )}
         </span>
       ))}
