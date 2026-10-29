@@ -6,13 +6,13 @@ export const es: ArticleSet = {
     slug: "about",
     title: "Acerca de keyboardfast",
     description:
-      "keyboardfast es una prueba de mecanografía gratuita en seis idiomas, con modo código, estadísticas honestas y un modo práctica que trabaja tus teclas débiles.",
+      "keyboardfast es una prueba de mecanografía gratuita en 14 idiomas, con modo código, estadísticas honestas y un modo práctica que trabaja tus teclas débiles.",
     minutes: 2,
     sections: [
       {
         heading: "Qué es keyboardfast",
         body: [
-          "keyboardfast es una prueba de velocidad de escritura pensada para quienes quieren mejorar de verdad, no solo ver un número. Puedes medirte en español, inglés, turco, alemán, francés y portugués, o escribir código real en ocho lenguajes de programación.",
+          "keyboardfast es una prueba de velocidad de escritura pensada para quienes quieren mejorar de verdad, no solo ver un número. Puedes medirte en 14 idiomas, del español y el inglés al polaco, el ruso y el indonesio, o escribir código real en ocho lenguajes de programación.",
           "Cada resultado muestra mucho más que la velocidad: precisión, constancia, un gráfico segundo a segundo, las teclas que te frenaron y cómo escribes las letras en comparación con los símbolos.",
         ],
       },

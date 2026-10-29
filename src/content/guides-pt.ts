@@ -6,13 +6,13 @@ export const pt: ArticleSet = {
     slug: "about",
     title: "Sobre o keyboardfast",
     description:
-      "O keyboardfast é um teste de digitação gratuito em seis idiomas, com modo código, estatísticas honestas e um modo prática que treina suas teclas fracas.",
+      "O keyboardfast é um teste de digitação gratuito em 14 idiomas, com modo código, estatísticas honestas e um modo prática que treina suas teclas fracas.",
     minutes: 2,
     sections: [
       {
         heading: "O que é o keyboardfast",
         body: [
-          "O keyboardfast é um teste de velocidade de digitação feito para quem quer melhorar de verdade, e não só ver um número. Você pode se testar em português, inglês, turco, alemão, espanhol e francês, ou digitar código real em oito linguagens de programação.",
+          "O keyboardfast é um teste de velocidade de digitação feito para quem quer melhorar de verdade, e não só ver um número. Você pode se testar em 14 idiomas, do português e do inglês ao polonês, ao russo e ao indonésio, ou digitar código real em oito linguagens de programação.",
           "Cada resultado mostra muito mais que a velocidade: precisão, consistência, um gráfico segundo a segundo, as teclas que te atrasaram e como você digita letras em comparação com símbolos.",
         ],
       },

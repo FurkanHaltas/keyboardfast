@@ -6,13 +6,13 @@ export const fr: ArticleSet = {
     slug: "about",
     title: "À propos de keyboardfast",
     description:
-      "keyboardfast est un test de frappe gratuit en six langues, avec un mode code, des statistiques honnêtes et un mode entraînement qui cible vos touches faibles.",
+      "keyboardfast est un test de frappe gratuit en 14 langues, avec un mode code, des statistiques honnêtes et un mode entraînement qui cible vos touches faibles.",
     minutes: 2,
     sections: [
       {
         heading: "Ce qu'est keyboardfast",
         body: [
-          "keyboardfast est un test de vitesse de frappe conçu pour celles et ceux qui veulent vraiment progresser, pas seulement voir un chiffre. Vous pouvez vous tester en français, anglais, turc, allemand, espagnol et portugais, ou taper du vrai code dans huit langages de programmation.",
+          "keyboardfast est un test de vitesse de frappe conçu pour celles et ceux qui veulent vraiment progresser, pas seulement voir un chiffre. Vous pouvez vous tester dans 14 langues, du français et de l'anglais au polonais, au russe et à l'indonésien, ou taper du vrai code dans huit langages de programmation.",
           "Chaque résultat va au-delà de la vitesse : précision, régularité, un graphique seconde par seconde, les touches qui vous ont ralenti et la façon dont vous tapez les lettres par rapport aux symboles.",
         ],
       },

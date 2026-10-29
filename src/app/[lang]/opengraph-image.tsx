@@ -53,7 +53,7 @@ export default function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", fontSize: 30, color: "#8a93a3" }}>
-          <span>Typing speed test · 6 languages · code mode</span>
+          <span>Typing speed test · 14 languages · code mode</span>
           <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
             <span style={{ fontSize: 96, fontWeight: 700, color: "#f5b041" }}>120</span>
             <span style={{ fontSize: 36, color: "#8a93a3" }}>wpm</span>

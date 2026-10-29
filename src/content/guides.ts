@@ -31,13 +31,13 @@ const about: Record<ContentLang, Article> = {
     slug: "about",
     title: "About keyboardfast",
     description:
-      "keyboardfast is a free typing test in six languages with a code mode, honest statistics and a practice mode that targets your weak keys.",
+      "keyboardfast is a free typing test in 14 languages with a code mode, honest statistics and a practice mode that targets your weak keys.",
     minutes: 2,
     sections: [
       {
         heading: "What keyboardfast is",
         body: [
-          "keyboardfast is a typing speed test built for people who want to actually get better, not just see a number. You can test yourself in English, Turkish, German, Spanish, French and Portuguese, or type real code in eight programming languages.",
+          "keyboardfast is a typing speed test built for people who want to actually get better, not just see a number. You can test yourself in 14 languages, from English and Turkish to Polish, Russian and Indonesian, or type real code in eight programming languages.",
           "Every result comes with more than speed: accuracy, consistency, a second-by-second chart, the keys that slowed you down and how you type letters compared with symbols.",
         ],
       },
@@ -68,13 +68,13 @@ const about: Record<ContentLang, Article> = {
     slug: "about",
     title: "keyboardfast hakkında",
     description:
-      "keyboardfast; altı dilde, kod modu, dürüst istatistikleri ve zayıf tuşlarını hedefleyen alıştırma moduyla ücretsiz bir klavye hız testidir.",
+      "keyboardfast; 14 dilde, kod modu, dürüst istatistikleri ve zayıf tuşlarını hedefleyen alıştırma moduyla ücretsiz bir klavye hız testidir.",
     minutes: 2,
     sections: [
       {
         heading: "keyboardfast nedir?",
         body: [
-          "keyboardfast, sadece bir sayı görmek değil gerçekten gelişmek isteyenler için yapılmış bir klavye hız testi. Türkçe, İngilizce, Almanca, İspanyolca, Fransızca ve Portekizce test yapabilir ya da sekiz programlama dilinde gerçek kod yazabilirsin.",
+          "keyboardfast, sadece bir sayı görmek değil gerçekten gelişmek isteyenler için yapılmış bir klavye hız testi. Türkçe ve İngilizceden Lehçe, Rusça ve Endonezceye kadar 14 dilde test yapabilir ya da sekiz programlama dilinde gerçek kod yazabilirsin.",
           "Her sonuç sadece hızdan ibaret değil: doğruluk, tutarlılık, saniye saniye hız grafiği, seni yavaşlatan tuşlar ve harflerle sembolleri yazışının karşılaştırması da gösterilir.",
         ],
       },

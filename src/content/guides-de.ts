@@ -6,13 +6,13 @@ export const de: ArticleSet = {
     slug: "about",
     title: "Über keyboardfast",
     description:
-      "keyboardfast ist ein kostenloser Tipptest in sechs Sprachen mit Code-Modus, ehrlichen Statistiken und einem Übungsmodus, der gezielt deine schwachen Tasten trainiert.",
+      "keyboardfast ist ein kostenloser Tipptest in 14 Sprachen mit Code-Modus, ehrlichen Statistiken und einem Übungsmodus, der gezielt deine schwachen Tasten trainiert.",
     minutes: 2,
     sections: [
       {
         heading: "Was keyboardfast ist",
         body: [
-          "keyboardfast ist ein Tipptest für alle, die wirklich besser werden wollen, statt nur eine Zahl zu sehen. Du kannst dich auf Englisch, Türkisch, Deutsch, Spanisch, Französisch und Portugiesisch testen oder echten Code in acht Programmiersprachen tippen.",
+          "keyboardfast ist ein Tipptest für alle, die wirklich besser werden wollen, statt nur eine Zahl zu sehen. Du kannst dich in 14 Sprachen testen, von Deutsch und Englisch bis Polnisch, Russisch und Indonesisch, oder echten Code in acht Programmiersprachen tippen.",
           "Jedes Ergebnis zeigt mehr als die Geschwindigkeit: Genauigkeit, Konstanz, ein Diagramm Sekunde für Sekunde, die Tasten, die dich gebremst haben, und wie du Buchstaben im Vergleich zu Symbolen tippst.",
         ],
       },
