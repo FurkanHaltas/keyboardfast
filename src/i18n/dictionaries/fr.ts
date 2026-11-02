@@ -6,7 +6,7 @@ const fr: Dictionary = {
     description:
       "Un test de dactylographie clair et rapide. Mesurez vos MPM et votre précision dans plusieurs langues, entraînez-vous sur du vrai code et suivez vos progrès.",
   },
-  nav: { test: "test", progress: "progrès", settings: "réglages", language: "langue de l'interface", leaderboard: "classement" },
+  nav: { test: "test", progress: "progrès", settings: "réglages", language: "langue de l'interface", leaderboard: "classement", guides: "guides" },
   config: {
     time: "temps",
     words: "mots",
@@ -198,6 +198,34 @@ const fr: Dictionary = {
     ctaTitle: "Passez à la pratique",
     ctaBody: "Faites un test maintenant ou laissez le mode entraînement travailler vos touches faibles.",
     ctaButton: "Faire un test",
+    fingers: {
+      aria: "Schéma du clavier indiquant quel doigt frappe chaque touche",
+      caption: "Chaque couleur correspond à un doigt. Les touches F et J, marquées d'un petit relief, indiquent où reposent les index.",
+      pinky: "Auriculaire",
+      ring: "Annulaire",
+      middle: "Majeur",
+      index: "Index",
+      thumb: "Pouces",
+    },
+  },
+  contact: {
+    title: "Contact",
+    description: "Un bug, une idée ou une question sur vos données ? Voici comment nous joindre.",
+    emailLabel: "Nous écrire",
+    response: "Nous lisons chaque message et répondons généralement sous deux à trois jours.",
+    topicsTitle: "Pour quoi nous écrire",
+    topics: [
+      "Bugs : quelque chose s'affiche mal, un test se comporte bizarrement ou une page ne se charge pas.",
+      "Idées : un mode, une langue de frappe ou une fonctionnalité que vous aimeriez voir.",
+      "Classement : un score qui semble faux ou un nom d'utilisateur qui enfreint les règles. Merci d'indiquer le nom d'utilisateur.",
+      "Vos données : questions sur la confidentialité, ou demande d'export ou de suppression des données de votre compte.",
+    ],
+    bugTitle: "Signaler un bug",
+    bugBody: "Indiquez si possible votre navigateur et votre appareil, la langue et le mode du test, et ce que vous attendiez. Une capture d'écran, c'est encore mieux.",
+    moreTitle: "Ailleurs sur le site",
+    guidesLink: "Guides de frappe : conseils sur la vitesse, la précision et la dactylographie",
+    privacyLink: "Politique de confidentialité : ce que nous conservons et pourquoi",
+    operator: "keyboardfast est conçu et géré par {name}, développeur indépendant.",
   },
   legal: {
     updated: "Dernière mise à jour : {date}",

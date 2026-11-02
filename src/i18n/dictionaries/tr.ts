@@ -6,7 +6,7 @@ const tr: Dictionary = {
     description:
       "Sade ve hızlı bir klavye hız testi. Birçok dilde WPM ve doğruluğunu ölç, gerçek kodla pratik yap, gelişimini takip et.",
   },
-  nav: { test: "test", progress: "gelişim", settings: "ayarlar", language: "arayüz dili", leaderboard: "liderlik" },
+  nav: { test: "test", progress: "gelişim", settings: "ayarlar", language: "arayüz dili", leaderboard: "liderlik", guides: "rehberler" },
   config: {
     time: "süre",
     words: "kelime",
@@ -198,6 +198,34 @@ const tr: Dictionary = {
     ctaTitle: "Hemen uygula",
     ctaBody: "Şimdi bir test yap ya da alıştırma moduyla zayıf tuşlarına çalış.",
     ctaButton: "Teste başla",
+    fingers: {
+      aria: "Hangi parmağın hangi tuşa bastığını gösteren klavye şeması",
+      caption: "Her renk bir parmağı gösterir. Üzerinde küçük çıkıntı olan F ve J tuşları, işaret parmaklarının durduğu yerdir.",
+      pinky: "Serçe parmak",
+      ring: "Yüzük parmağı",
+      middle: "Orta parmak",
+      index: "İşaret parmağı",
+      thumb: "Başparmaklar",
+    },
+  },
+  contact: {
+    title: "İletişim",
+    description: "Bir hata mı buldun, bir fikrin mi var ya da verilerinle ilgili bir sorun mu? Bize buradan ulaşabilirsin.",
+    emailLabel: "Bize e-posta gönder",
+    response: "Her mesajı okuyoruz ve genelde iki üç gün içinde yanıt veriyoruz.",
+    topicsTitle: "Hangi konularda yazabilirsin?",
+    topics: [
+      "Hatalar – bir şey yanlış görünüyor, test garip davranıyor ya da bir sayfa açılmıyor.",
+      "Fikirler – görmek istediğin bir mod, yazım dili ya da özellik.",
+      "Liderlik tablosu – hatalı görünen bir skor ya da kurallara uymayan bir kullanıcı adı. Lütfen kullanıcı adını da yaz.",
+      "Verilerin – gizlilikle ilgili sorular ya da hesap verilerinin dışa aktarılması veya silinmesi talebi.",
+    ],
+    bugTitle: "Hata bildirirken",
+    bugBody: "Tarayıcını ve cihazını, yazım dilini ve modu, ne olmasını beklediğini yazarsan çok yardımcı olur. Ekran görüntüsü eklersen daha da iyi.",
+    moreTitle: "Sitede başka neler var?",
+    guidesLink: "Klavye rehberleri – hız, doğruluk ve on parmak yazma için ipuçları",
+    privacyLink: "Gizlilik politikası – neyi neden sakladığımız",
+    operator: "keyboardfast, bağımsız bir geliştirici olan {name} tarafından geliştirilip yönetiliyor.",
   },
   legal: {
     updated: "Son güncelleme: {date}",

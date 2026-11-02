@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useI18n } from "@/i18n/I18nProvider";
-import { ContactEmail } from "./ContactEmail";
 
 export function Footer() {
   const { t, locale } = useI18n();
@@ -12,6 +11,7 @@ export function Footer() {
     { href: `/${locale}/privacy`, label: t.footer.privacy },
     { href: `/${locale}/cookies`, label: t.footer.cookies },
     { href: `/${locale}/terms`, label: t.footer.terms },
+    { href: `/${locale}/contact`, label: t.footer.contact },
   ];
   return (
     <footer className="flex flex-col gap-4 py-8 text-xs text-sub sm:flex-row sm:items-center sm:justify-between">
@@ -24,7 +24,6 @@ export function Footer() {
             {l.label}
           </Link>
         ))}
-        <ContactEmail className="transition-colors hover:text-text">{t.footer.contact}</ContactEmail>
         <span>
           © 2026{" "}
           <span translate="no" className="notranslate">

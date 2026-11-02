@@ -185,6 +185,7 @@ export const pt: ArticleSet = {
                 "Os polegares apertam a barra de espaço – normalmente o da mão que não digitou a última letra.",
               ],
             },
+            { figure: "fingers" },
             "Em português, as letras acentuadas usam teclas mortas: você aperta primeiro ´, ~ ou ^ com o mindinho direito e depois a vogal. Se essas teclas ou o Ç aparecem em vermelho no seu mapa de calor, aí está um bom ponto de partida.",
           ],
         },

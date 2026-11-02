@@ -6,7 +6,7 @@ const es: Dictionary = {
     description:
       "Un test de mecanografía limpio y rápido. Mide tus PPM y tu precisión en varios idiomas, practica con código real y sigue tu progreso.",
   },
-  nav: { test: "test", progress: "progreso", settings: "ajustes", language: "idioma de la interfaz", leaderboard: "clasificación" },
+  nav: { test: "test", progress: "progreso", settings: "ajustes", language: "idioma de la interfaz", leaderboard: "clasificación", guides: "guías" },
   config: {
     time: "tiempo",
     words: "palabras",
@@ -198,6 +198,34 @@ const es: Dictionary = {
     ctaTitle: "Ponlo en práctica",
     ctaBody: "Haz una prueba ahora o deja que el modo práctica entrene tus teclas débiles.",
     ctaButton: "Hacer una prueba",
+    fingers: {
+      aria: "Diagrama del teclado que muestra qué dedo pulsa cada tecla",
+      caption: "Cada color es un dedo. Las teclas con un pequeño relieve (F y J) marcan dónde descansan los índices.",
+      pinky: "Meñique",
+      ring: "Anular",
+      middle: "Corazón",
+      index: "Índice",
+      thumb: "Pulgares",
+    },
+  },
+  contact: {
+    title: "Contacto",
+    description: "¿Encontraste un error, tienes una idea o una pregunta sobre tus datos? Así puedes escribirnos.",
+    emailLabel: "Escríbenos un correo",
+    response: "Leemos todos los mensajes y solemos responder en dos o tres días.",
+    topicsTitle: "Sobre qué puedes escribirnos",
+    topics: [
+      "Errores: algo se ve mal, una prueba se comporta de forma rara o una página no carga.",
+      "Ideas: un modo, un idioma de escritura o una función que te gustaría ver.",
+      "Clasificación: una puntuación que parece incorrecta o un nombre de usuario que incumple las normas. Incluye el nombre de usuario, por favor.",
+      "Tus datos: preguntas sobre privacidad o solicitudes para exportar o eliminar los datos de tu cuenta.",
+    ],
+    bugTitle: "Cómo informar de un error",
+    bugBody: "Ayuda mucho que indiques tu navegador y dispositivo, el idioma y el modo de la prueba, y qué esperabas que pasara. Una captura de pantalla es todavía mejor.",
+    moreTitle: "Más en el sitio",
+    guidesLink: "Guías de mecanografía: consejos de velocidad, precisión y escritura al tacto",
+    privacyLink: "Política de privacidad: qué guardamos y por qué",
+    operator: "keyboardfast lo desarrolla y mantiene {name}, un desarrollador independiente.",
   },
   legal: {
     updated: "Última actualización: {date}",

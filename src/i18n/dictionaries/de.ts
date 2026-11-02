@@ -6,7 +6,7 @@ const de: Dictionary = {
     description:
       "Ein klarer, schneller Tipptest. Miss deine WPM und Genauigkeit in vielen Sprachen, übe mit echtem Code und verfolge deinen Fortschritt.",
   },
-  nav: { test: "test", progress: "fortschritt", settings: "einstellungen", language: "Sprache der Oberfläche", leaderboard: "rangliste" },
+  nav: { test: "test", progress: "fortschritt", settings: "einstellungen", language: "Sprache der Oberfläche", leaderboard: "rangliste", guides: "ratgeber" },
   config: {
     time: "zeit",
     words: "wörter",
@@ -198,6 +198,34 @@ const de: Dictionary = {
     ctaTitle: "Gleich ausprobieren",
     ctaBody: "Mach jetzt einen Test oder übe deine schwachen Tasten im Übungsmodus.",
     ctaButton: "Test starten",
+    fingers: {
+      aria: "Tastaturgrafik: welcher Finger welche Taste drückt",
+      caption: "Jede Farbe steht für einen Finger. Auf den Tasten mit kleiner Erhebung (F und J) ruhen deine Zeigefinger.",
+      pinky: "Kleiner Finger",
+      ring: "Ringfinger",
+      middle: "Mittelfinger",
+      index: "Zeigefinger",
+      thumb: "Daumen",
+    },
+  },
+  contact: {
+    title: "Kontakt",
+    description: "Einen Fehler gefunden, eine Idee oder eine Frage zu deinen Daten? So erreichst du uns.",
+    emailLabel: "Schreib uns eine E-Mail",
+    response: "Wir lesen jede Nachricht und antworten meist innerhalb von zwei bis drei Tagen.",
+    topicsTitle: "Worüber du schreiben kannst",
+    topics: [
+      "Fehler – etwas sieht falsch aus, ein Test verhält sich seltsam oder eine Seite lädt nicht.",
+      "Ideen – ein Modus, eine Tippsprache oder eine Funktion, die du dir wünschst.",
+      "Rangliste – ein Ergebnis, das falsch aussieht, oder ein Benutzername, der gegen die Regeln verstößt. Bitte nenne den Benutzernamen.",
+      "Deine Daten – Fragen zum Datenschutz oder der Wunsch, deine Kontodaten zu exportieren oder zu löschen.",
+    ],
+    bugTitle: "Einen Fehler melden",
+    bugBody: "Es hilft sehr, wenn du Browser und Gerät, Tippsprache und Modus nennst und beschreibst, was du erwartet hast. Ein Screenshot ist noch besser.",
+    moreTitle: "Mehr auf der Seite",
+    guidesLink: "Ratgeber – Tipps zu Tempo, Genauigkeit und dem Zehnfingersystem",
+    privacyLink: "Datenschutzerklärung – was wir speichern und warum",
+    operator: "keyboardfast wird von {name} entwickelt und betrieben, einem unabhängigen Entwickler.",
   },
   legal: {
     updated: "Zuletzt aktualisiert: {date}",

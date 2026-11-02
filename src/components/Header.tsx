@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartLine, Crown, Keyboard, Settings2 } from "lucide-react";
+import { BookOpen, ChartLine, Crown, Keyboard, Settings2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -21,11 +21,12 @@ export function Header() {
     { href: `/${locale}`, label: t.nav.test, icon: Keyboard, mobile: false },
     { href: `/${locale}/progress`, label: t.nav.progress, icon: ChartLine, mobile: true },
     { href: `/${locale}/leaderboard`, label: t.nav.leaderboard, icon: Crown, mobile: true },
+    { href: `/${locale}/guides`, label: t.nav.guides, icon: BookOpen, mobile: true },
   ];
 
   return (
-    <header className="flex items-center justify-between gap-2 py-6 sm:gap-4 sm:py-8">
-      <Link href={`/${locale}`} className="group flex items-center gap-2.5" aria-label="keyboardfast">
+    <header className="flex items-center justify-between gap-1 py-6 sm:gap-4 sm:py-8">
+      <Link href={`/${locale}`} className="group flex items-center gap-2 sm:gap-2.5" aria-label="keyboardfast">
         <LogoMark />
         {/* Brand name: keep browser translation from turning it into "klavye hızlı". */}
         <span translate="no" className="notranslate text-lg font-semibold tracking-tight text-text sm:text-[1.35rem]">
@@ -35,13 +36,13 @@ export function Header() {
 
       <nav className="flex items-center text-sm sm:gap-1">
         {nav.map(({ href, label, icon: Icon, mobile }) => {
-          const active = pathname === href;
+          const active = pathname === href || (href.endsWith("/guides") && pathname.startsWith(`${href}/`));
           return (
             <Link
               key={href}
               href={href}
               aria-current={active ? "page" : undefined}
-              className={`items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:text-text sm:flex sm:px-3 ${
+              className={`items-center gap-2 rounded-lg px-1.5 py-2 transition-colors hover:text-text sm:flex sm:px-3 ${
                 mobile ? "flex" : "hidden"
               } ${active ? "text-text" : "text-sub"}`}
             >
@@ -53,7 +54,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => openSettings(true)}
-          className="flex items-center gap-2 rounded-lg px-2 py-2 text-sub transition-colors hover:text-text sm:px-3"
+          className="flex items-center gap-2 rounded-lg px-1.5 py-2 text-sub transition-colors hover:text-text sm:px-3"
           aria-label={t.nav.settings}
         >
           <Settings2 size={17} strokeWidth={2} />

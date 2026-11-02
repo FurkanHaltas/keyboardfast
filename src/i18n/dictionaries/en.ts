@@ -4,7 +4,7 @@ const en = {
     description:
       "A clean, fast typing test. Measure your WPM and accuracy in many languages, practise with real code, and track your progress over time.",
   },
-  nav: { test: "test", progress: "progress", settings: "settings", language: "interface language", leaderboard: "leaderboard" },
+  nav: { test: "test", progress: "progress", settings: "settings", language: "interface language", leaderboard: "leaderboard", guides: "guides" },
   config: {
     time: "time",
     words: "words",
@@ -196,6 +196,34 @@ const en = {
     ctaTitle: "Put it into practice",
     ctaBody: "Take a test now, or let practice mode drill your weak keys.",
     ctaButton: "Take a test",
+    fingers: {
+      aria: "Keyboard diagram showing which finger presses each key",
+      caption: "Each colour is one finger. The keys with a small bump (F and J) are where your index fingers rest.",
+      pinky: "Little finger",
+      ring: "Ring finger",
+      middle: "Middle finger",
+      index: "Index finger",
+      thumb: "Thumbs",
+    },
+  },
+  contact: {
+    title: "Contact",
+    description: "Found a bug, have an idea or a question about your data? Here's how to reach us.",
+    emailLabel: "Email us",
+    response: "We read every message and usually reply within two or three days.",
+    topicsTitle: "What you can write about",
+    topics: [
+      "Bugs – something looks wrong, a test misbehaves or a page won't load.",
+      "Ideas – a mode, a typing language or a feature you'd like to see.",
+      "Leaderboard – a score that looks wrong or a username that breaks the rules. Please include the username.",
+      "Your data – questions about privacy, or a request to export or delete your account data.",
+    ],
+    bugTitle: "Reporting a bug",
+    bugBody: "It helps a lot if you mention your browser and device, the typing language and mode, and what you expected to happen. A screenshot is even better.",
+    moreTitle: "Elsewhere on the site",
+    guidesLink: "Typing guides – tips for speed, accuracy and touch typing",
+    privacyLink: "Privacy policy – what we store and why",
+    operator: "keyboardfast is built and run by {name}, an independent developer.",
   },
   legal: {
     updated: "Last updated: {date}",

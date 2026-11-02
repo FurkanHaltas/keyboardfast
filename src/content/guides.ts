@@ -8,7 +8,8 @@ import { es } from "./guides-es";
 import { fr } from "./guides-fr";
 import { pt } from "./guides-pt";
 
-export type Block = string | { list: string[] };
+/** A paragraph, a bullet list, or a built-in figure drawn by the page (e.g. the finger map). */
+export type Block = string | { list: string[] } | { figure: "fingers" };
 
 export interface Article {
   slug: string;
@@ -250,6 +251,7 @@ const guides: Record<ContentLang, Article[]> = {
                 "Thumbs press the space bar – usually the thumb of the hand that didn't type the last letter.",
               ],
             },
+            { figure: "fingers" },
             "On Turkish Q, the letters Ğ, Ü, Ş, İ, Ö and Ç are all at the edges of the keyboard, so your little fingers and ring fingers get more work than in English. If those keys show up red on your heatmap, that's the reason.",
           ],
         },
@@ -463,6 +465,7 @@ const guides: Record<ContentLang, Article[]> = {
                 "Başparmaklar boşluk tuşuna basar – genelde son harfi yazmayan elin başparmağı.",
               ],
             },
+            { figure: "fingers" },
             "Türkçe Q'da Ğ, Ü, Ş, İ, Ö ve Ç harflerinin hepsi klavyenin kenarlarında olduğu için serçe ve yüzük parmakları İngilizceye göre daha çok çalışır. Isı haritanda bu tuşlar kırmızı çıkıyorsa sebebi budur.",
           ],
         },

@@ -38,7 +38,7 @@ export function AccountMenu() {
       <button
         type="button"
         onClick={() => openAuth(true)}
-        className="flex items-center gap-2 rounded-lg px-2 py-2 text-sub transition-colors hover:text-text sm:px-3"
+        className="flex items-center gap-2 rounded-lg px-1.5 py-2 text-sub transition-colors hover:text-text sm:px-3"
         aria-label={t.auth.signIn}
       >
         <LogIn size={17} strokeWidth={2} />

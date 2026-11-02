@@ -185,6 +185,7 @@ export const es: ArticleSet = {
                 "Los pulgares pulsan la barra espaciadora, normalmente el de la mano que no escribió la última letra.",
               ],
             },
+            { figure: "fingers" },
             "En español, las vocales con tilde se escriben pulsando primero la tecla ´ con el meñique derecho y luego la vocal. Si esa tecla o la Ñ aparecen en rojo en tu mapa de calor, ahí tienes un buen punto de partida.",
           ],
         },

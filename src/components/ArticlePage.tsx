@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
 import type { Article, Block } from "@/content/guides";
 import { fmt, getDictionary, type Locale } from "@/i18n/config";
+import { FingerMap, type FingerLabels } from "./FingerMap";
 
 /** About page and guides: long-form text with a call to action back to the test. */
 export async function ArticlePage({ article, locale, guide }: { article: Article; locale: Locale; guide?: boolean }) {
@@ -30,7 +31,7 @@ export async function ArticlePage({ article, locale, guide }: { article: Article
           <h2 className="mb-3 text-xl font-semibold">{s.heading}</h2>
           <div className="space-y-4">
             {s.body.map((b, i) => (
-              <BlockView key={i} block={b} />
+              <BlockView key={i} block={b} locale={locale} fingers={t.guides.fingers} />
             ))}
           </div>
         </section>
@@ -51,8 +52,9 @@ export async function ArticlePage({ article, locale, guide }: { article: Article
   );
 }
 
-function BlockView({ block }: { block: Block }) {
+function BlockView({ block, locale, fingers }: { block: Block; locale: Locale; fingers: FingerLabels }) {
   if (typeof block === "string") return <p className="leading-relaxed text-text/85">{block}</p>;
+  if ("figure" in block) return <FingerMap locale={locale} labels={fingers} />;
   return (
     <ul className="space-y-2.5">
       {block.list.map((item) => (

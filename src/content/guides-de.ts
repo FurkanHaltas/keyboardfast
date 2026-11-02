@@ -185,6 +185,7 @@ export const de: ArticleSet = {
                 "Die Daumen drücken die Leertaste – meist der Daumen der Hand, die den letzten Buchstaben nicht getippt hat.",
               ],
             },
+            { figure: "fingers" },
             "Auf QWERTZ liegen die Umlaute Ü, Ö und Ä alle am rechten Rand, sodass dein rechter kleiner Finger mehr arbeitet als im Englischen. Erscheinen diese Tasten auf deiner Heatmap rot, ist das der Grund.",
           ],
         },

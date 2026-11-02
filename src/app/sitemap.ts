@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/site";
 
 const PAGES = ["", "/leaderboard", "/privacy", "/cookies", "/terms"];
 
-const CONTENT = ["/about", "/guides", ...GUIDE_SLUGS.map((s) => `/guides/${s}`)];
+const CONTENT = ["/about", "/contact", "/guides", ...GUIDE_SLUGS.map((s) => `/guides/${s}`)];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries = (pages: string[], locales: readonly string[]) =>

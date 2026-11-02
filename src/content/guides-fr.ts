@@ -185,6 +185,7 @@ export const fr: ArticleSet = {
                 "Les pouces frappent la barre d'espace, généralement celui de la main qui n'a pas tapé la dernière lettre.",
               ],
             },
+            { figure: "fingers" },
             "En AZERTY, les lettres accentuées é, è, à et ç se trouvent sur la rangée des chiffres : elles demandent un grand écart aux doigts. Si elles apparaissent en rouge sur votre carte de chaleur, c'est la raison.",
           ],
         },

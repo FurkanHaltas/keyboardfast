@@ -6,7 +6,7 @@ const pt: Dictionary = {
     description:
       "Um teste de digitação limpo e rápido. Meça suas PPM e sua precisão em vários idiomas, pratique com código real e acompanhe sua evolução.",
   },
-  nav: { test: "teste", progress: "evolução", settings: "ajustes", language: "idioma da interface", leaderboard: "ranking" },
+  nav: { test: "teste", progress: "evolução", settings: "ajustes", language: "idioma da interface", leaderboard: "ranking", guides: "guias" },
   config: {
     time: "tempo",
     words: "palavras",
@@ -198,6 +198,34 @@ const pt: Dictionary = {
     ctaTitle: "Coloque em prática",
     ctaBody: "Faça um teste agora ou deixe o modo prática treinar suas teclas fracas.",
     ctaButton: "Fazer um teste",
+    fingers: {
+      aria: "Diagrama do teclado mostrando qual dedo aperta cada tecla",
+      caption: "Cada cor é um dedo. As teclas com um pequeno relevo (F e J) mostram onde os indicadores ficam apoiados.",
+      pinky: "Mindinho",
+      ring: "Anelar",
+      middle: "Médio",
+      index: "Indicador",
+      thumb: "Polegares",
+    },
+  },
+  contact: {
+    title: "Contato",
+    description: "Encontrou um erro, tem uma ideia ou uma dúvida sobre seus dados? Veja como falar com a gente.",
+    emailLabel: "Envie um e-mail",
+    response: "Lemos todas as mensagens e costumamos responder em dois ou três dias.",
+    topicsTitle: "Sobre o que você pode escrever",
+    topics: [
+      "Erros: algo parece errado, um teste se comporta de forma estranha ou uma página não carrega.",
+      "Ideias: um modo, um idioma de digitação ou um recurso que você gostaria de ver.",
+      "Ranking: uma pontuação que parece errada ou um nome de usuário que viola as regras. Inclua o nome de usuário, por favor.",
+      "Seus dados: dúvidas sobre privacidade ou pedidos para exportar ou excluir os dados da sua conta.",
+    ],
+    bugTitle: "Como relatar um erro",
+    bugBody: "Ajuda muito informar seu navegador e dispositivo, o idioma e o modo do teste e o que você esperava que acontecesse. Uma captura de tela é melhor ainda.",
+    moreTitle: "Mais no site",
+    guidesLink: "Guias de digitação: dicas de velocidade, precisão e digitação com os dez dedos",
+    privacyLink: "Política de privacidade: o que guardamos e por quê",
+    operator: "O keyboardfast é desenvolvido e mantido por {name}, um desenvolvedor independente.",
   },
   legal: {
     updated: "Última atualização: {date}",

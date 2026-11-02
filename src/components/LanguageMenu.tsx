@@ -40,7 +40,7 @@ export function LanguageMenu() {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t.nav.language}
-        className="flex items-center gap-1.5 rounded-lg px-2 py-2 text-sub transition-colors hover:text-text sm:px-3"
+        className="flex items-center gap-1 rounded-lg px-1.5 py-2 text-sub transition-colors hover:text-text sm:gap-1.5 sm:px-3"
       >
         <Globe size={17} strokeWidth={2} />
         <span className="font-mono text-xs uppercase">{locale}</span>
